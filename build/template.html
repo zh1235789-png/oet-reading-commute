@@ -136,10 +136,76 @@ const KEY = 'oet-reading-commute-v1';
 const INTERVALS = [1, 3, 7, 21];
 let S = load();
 function load(){
-  try { const s = JSON.parse(localStorage.getItem(KEY)); if (s && s.items) return Object.assign({days:{}, fs:16}, s); } catch(e){}
-  return {items:{}, days:{}, fs:16};
+  let s = null;
+  try { s = JSON.parse(localStorage.getItem(KEY)); } catch(e){}
+  s = Object.assign({items:{}, days:{}, fs:16, others:{}, resetAt:0}, (s && s.items) ? s : {});
+  if (!s.dev) s.dev = Math.random().toString(36).slice(2, 10);
+  for (const r of Object.values(s.items)) if (!r.ts) r.ts = Date.parse((r.last || '1970-01-01') + 'T12:00:00');
+  return s;
 }
 function save(){ try { localStorage.setItem(KEY, JSON.stringify(S)); } catch(e){} }
+/* 1日の解答数＝この端末＋同期した他端末の合計 */
+function dayCount(d){ let n = S.days[d] || 0; for (const k in S.others) n += (S.others[k] || {})[d] || 0; return n; }
+
+/* ---------- 端末間同期（GitHub 非公開Gist） ---------- */
+const SYNC_KEY = 'oet-reading-commute-sync', GIST_FILE = 'oet-reading-commute.json', GIST_DESC = 'OET Reading commute sync (auto)';
+let SY = (() => { try { return JSON.parse(localStorage.getItem(SYNC_KEY)) || {}; } catch(e) { return {}; } })();
+const saveSY = () => { try { localStorage.setItem(SYNC_KEY, JSON.stringify(SY)); } catch(e){} };
+let syncing = false, syncAgain = false, syncTimer = null;
+async function gh(path, opts = {}){
+  const res = await fetch('https://api.github.com' + path, Object.assign({cache:'no-store'}, opts, {headers:{
+    'Authorization':'Bearer ' + SY.token, 'Accept':'application/vnd.github+json', 'Content-Type':'application/json'}}));
+  if (!res.ok) throw new Error(res.status === 401 ? 'トークンが無効か期限切れです' : res.status === 403 || res.status === 404 ? 'トークンにgist権限がありません（' + res.status + '）' : 'GitHubエラー ' + res.status);
+  return res.status === 204 ? null : res.json();
+}
+function syncDoc(){ return {v:1, resetAt:S.resetAt || 0, items:S.items, daysBy:Object.assign({}, S.others, {[S.dev]:S.days})}; }
+function mergeRemote(R){
+  if (!R || !R.items) return;
+  const resetAt = Math.max(S.resetAt || 0, R.resetAt || 0);
+  if (resetAt > (S.resetAt || 0)) { S.days = {}; S.others = {}; }
+  const items = {};
+  for (const src of [S.items, R.items]) for (const [id, r] of Object.entries(src)) {
+    if ((r.ts || 0) < resetAt) continue;
+    if (!items[id] || (r.ts || 0) > (items[id].ts || 0)) items[id] = r;
+  }
+  S.items = items; S.resetAt = resetAt;
+  if ((R.resetAt || 0) >= resetAt) { const o = Object.assign({}, R.daysBy || {}); delete o[S.dev]; S.others = o; }
+}
+async function syncNow(){
+  if (!SY.token) return;
+  if (syncing) { syncAgain = true; return; }
+  syncing = true; SY.state = 'syncing'; syncBadge();
+  try {
+    if (!SY.gistId) {
+      const list = await gh('/gists?per_page=100');
+      const g = list.find(x => x.files && x.files[GIST_FILE]);
+      SY.gistId = g ? g.id : (await gh('/gists', {method:'POST', body:JSON.stringify({description:GIST_DESC, public:false, files:{[GIST_FILE]:{content:JSON.stringify(syncDoc())}}})})).id;
+    }
+    const g = await gh('/gists/' + SY.gistId);
+    const f = g.files[GIST_FILE];
+    let remoteText = f ? f.content : '';
+    if (f && f.truncated) remoteText = await (await fetch(f.raw_url, {cache:'no-store'})).text();
+    let remote = null; try { remote = JSON.parse(remoteText); } catch(e){}
+    mergeRemote(remote); save();
+    const mine = JSON.stringify(syncDoc());
+    if (mine !== remoteText) await gh('/gists/' + SY.gistId, {method:'PATCH', body:JSON.stringify({files:{[GIST_FILE]:{content:mine}}})});
+    SY.last = Date.now(); SY.state = 'ok'; SY.err = '';
+  } catch(e) {
+    SY.state = 'err'; SY.err = navigator.onLine === false ? 'オフライン（次にネットにつながったとき同期します）' : e.message;
+  }
+  saveSY(); syncing = false;
+  if (!VIEW) render(); else syncBadge();
+  if (syncAgain) { syncAgain = false; syncNow(); }
+}
+function syncSoon(){ if (!SY.token) return; clearTimeout(syncTimer); syncTimer = setTimeout(syncNow, 2000); }
+function syncText(){
+  if (!SY.token) return '';
+  if (SY.state === 'syncing') return '☁️ 同期中…';
+  if (SY.state === 'err') return '⚠️ 同期エラー：' + SY.err;
+  if (SY.last) { const d = new Date(SY.last); return `☁️ 同期済み ${d.getMonth()+1}/${d.getDate()} ${String(d.getHours()).padStart(2,'0')}:${String(d.getMinutes()).padStart(2,'0')}`; }
+  return '☁️ 同期待ち';
+}
+function syncBadge(){ const el = document.getElementById('syncbadge'); if (el) el.textContent = syncText(); }
 
 /* ---------- helpers ---------- */
 const $ = s => document.querySelector(s);
@@ -184,14 +250,14 @@ function answer(it, choice){
   const t = today();
   const r = S.items[it.id] || {n:0, wrong:0, box:0, hist:[]};
   r.n++; if (!ok) r.wrong++;
-  r.lastOk = ok; r.last = t; r.hist.push([t, choice]); if (r.hist.length > 10) r.hist.shift();
+  r.lastOk = ok; r.last = t; r.ts = Date.now(); r.hist.push([t, choice]); if (r.hist.length > 10) r.hist.shift();
   if (ok) {
     if (r.wrong === 0 && !it.past) { r.box = INTERVALS.length; r.due = null; }  // 初見で正解＝習得
     else { r.box = Math.min((r.box || 0) + 1, INTERVALS.length); r.due = r.box >= INTERVALS.length ? null : addDays(t, INTERVALS[r.box]); }
   } else { r.box = 0; r.due = addDays(t, INTERVALS[0]); }
   S.items[it.id] = r;
   S.days[t] = (S.days[t] || 0) + 1;
-  save();
+  save(); syncSoon();
   return ok;
 }
 
@@ -208,13 +274,13 @@ function render(){
 }
 function streak(){
   let n = 0, d = today();
-  if (!S.days[d]) d = addDays(d, -1);
-  while (S.days[d]) { n++; d = addDays(d, -1); }
+  if (!dayCount(d)) d = addDays(d, -1);
+  while (dayCount(d)) { n++; d = addDays(d, -1); }
   return n;
 }
 function renderToday(){
   $('#htitle').textContent = 'OET Reading 通勤ドリル';
-  const t = today(), done = S.days[t] || 0;
+  const t = today(), done = dayCount(t);
   const dueB = ITEMS.filter(i => i.part==='B' && status(i)==='due').length;
   const dueC = ITEMS.filter(i => i.part==='C' && status(i)==='due').length;
   const nb = nextItem('B'), nc = nextItem('C');
@@ -237,6 +303,7 @@ function renderToday(){
       <div class="muted">該当段落1つ＋4択 → 根拠文ハイライト</div>
       <button class="bigbtn c" data-go="${nc.id}">C を1問解く</button>
     </div>
+    ${SY.token ? `<p class="tiny" id="syncbadge">${esc(syncText())}</p>` : ''}
     <p class="tiny">出題順：復習期限の来た問題 → 未回答（過去模試の誤答を優先）→ しばらく解いていない問題。間違えた問題は1→3→7→21日後に再出題。</p>`;
   $('#main').querySelectorAll('[data-go]').forEach(b => b.onclick = () => openItem(b.dataset.go, 'today'));
 }
@@ -344,7 +411,7 @@ function renderLog(){
       its.map(i => { const r = rec(i.id); const cls = !r ? '' : r.lastOk ? (r.wrong ? 'fix' : 'ok') : 'ng'; return `<div class="cell ${cls}" title="${i.id}"></div>`; }).join('') + '</div>';
   }).join('');
   let heat = '';
-  for (let k = 27; k >= 0; k--) { const d = addDays(today(), -k), n = S.days[d] || 0; heat += `<div class="${n>=6?'l3':n>=3?'l2':n>=1?'l1':''}" title="${d}: ${n}問"></div>`; }
+  for (let k = 27; k >= 0; k--) { const d = addDays(today(), -k), n = dayCount(d); heat += `<div class="${n>=6?'l3':n>=3?'l2':n>=1?'l1':''}" title="${d}: ${n}問"></div>`; }
   const weakC = ITEMS.filter(i => rec(i.id) && !rec(i.id).lastOk).length;
   $('#main').innerHTML = `
     <div class="card"><div class="stats">
@@ -356,11 +423,26 @@ function renderLog(){
     <div class="card"><div class="muted">Part B</div>${cells('B')}
       <div class="legend"><span><i style="background:var(--ok)"></i>正解</span><span><i style="background:#15803d;outline:1px solid var(--bad)"></i>ミス後に正解</span><span><i style="background:var(--bad)"></i>直近不正解</span><span><i style="background:var(--line)"></i>未回答</span></div></div>
     <div class="card"><div class="muted">Part C</div>${cells('C')}</div>
-    <div class="card"><div class="muted">データ（この端末のみに保存）</div>
+    <div class="card"><div class="muted">iPhone・iPad間の同期（GitHubの非公開Gist）</div>
+      ${SY.token ? `<p class="tiny" id="syncbadge" style="margin:8px 0 0">${esc(syncText())}</p>
+        <div class="small-btns"><button id="syncgo">今すぐ同期</button><button id="syncoff">この端末の同期を解除</button></div>`
+      : `<ol class="tiny" style="padding-left:18px;margin:8px 0">
+          <li><a href="https://github.com/settings/tokens/new?scopes=gist&description=OET%20Reading%20sync" target="_blank" rel="noopener" style="color:var(--C)">GitHubのトークン作成画面</a>を開く（gistにだけチェックが入った状態で開きます）</li>
+          <li>Expiration を選び（例：No expiration か 1年）、一番下の「Generate token」を押す</li>
+          <li>表示された ghp_… をコピーして下に貼り付け、「接続」を押す</li>
+          <li>iPad側でも同じトークンを貼り付ける（1台で作ったトークンを使い回してOK）</li></ol>
+        <input id="tok" type="password" autocomplete="off" placeholder="ghp_…" style="width:100%;padding:10px;border-radius:10px;border:1px solid var(--line);background:var(--card2);color:var(--txt);font-size:16px">
+        <div class="small-btns"><button id="syncon">接続</button></div>
+        <p class="tiny">トークンはこの端末の中にだけ保存され、GitHub以外には送られません。</p>`}
+    </div>
+    <div class="card"><div class="muted">データ</div>
       <div class="small-btns"><button id="exp">バックアップをコピー</button><button id="imp">バックアップから復元</button><button id="rst">全記録をリセット</button></div></div>`;
   $('#exp').onclick = async () => { const t = JSON.stringify(S); try { await navigator.clipboard.writeText(t); alert('コピーしました'); } catch(e) { prompt('このテキストを保存してください', t); } };
-  $('#imp').onclick = () => { const t = prompt('バックアップのテキストを貼り付け'); if (!t) return; try { const s = JSON.parse(t); if (!s.items) throw 0; S = Object.assign({days:{}, fs:16}, s); save(); applyFs(); render(); alert('復元しました'); } catch(e) { alert('形式が正しくありません'); } };
-  $('#rst').onclick = () => { if (confirm('すべての回答記録を消去します。よろしいですか？')) { S = {items:{}, days:{}, fs:S.fs}; save(); render(); } };
+  $('#imp').onclick = () => { const t = prompt('バックアップのテキストを貼り付け'); if (!t) return; try { const s = JSON.parse(t); if (!s.items) throw 0; const dev = S.dev; S = Object.assign({days:{}, fs:16, others:{}, resetAt:0}, s, {dev}); for (const r of Object.values(S.items)) r.ts = Date.now(); save(); syncSoon(); applyFs(); render(); alert('復元しました'); } catch(e) { alert('形式が正しくありません'); } };
+  $('#rst').onclick = () => { if (confirm('すべての回答記録を消去します。' + (SY.token ? '同期中の他の端末からも消えます。' : '') + 'よろしいですか？')) { S.items = {}; S.days = {}; S.others = {}; S.resetAt = Date.now(); save(); render(); syncNow(); } };
+  if ($('#syncon')) $('#syncon').onclick = () => { const t = $('#tok').value.trim(); if (!t) return; SY = {token:t}; saveSY(); render(); syncNow(); };
+  if ($('#syncgo')) $('#syncgo').onclick = () => syncNow();
+  if ($('#syncoff')) $('#syncoff').onclick = () => { if (confirm('この端末の同期を解除します（記録はこの端末に残ります）')) { SY = {}; saveSY(); render(); } };
 }
 
 /* font size */
@@ -369,6 +451,9 @@ $('#fsm').onclick = () => { S.fs = Math.max(13, S.fs - 1); applyFs(); save(); };
 $('#fsp').onclick = () => { S.fs = Math.min(22, S.fs + 1); applyFs(); save(); };
 document.querySelectorAll('nav button').forEach(b => b.onclick = () => setTab(b.dataset.tab));
 applyFs(); render();
+syncNow();
+document.addEventListener('visibilitychange', () => { if (document.visibilityState === 'visible') syncNow(); });
+window.addEventListener('online', () => syncNow());
 if ('serviceWorker' in navigator && location.protocol === 'https:') navigator.serviceWorker.register('sw.js').catch(() => {});
 </script>
 </body>
