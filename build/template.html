@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>OET Reading 通勤ドリル</title>
+<meta name="theme-color" content="#0f172a">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Reading">
+<link rel="apple-touch-icon" href="icon.png">
+<link rel="manifest" href="manifest.json">
+<style>
+:root{
+  --bg:#0f172a; --card:#1e293b; --card2:#273548; --line:#334155;
+  --txt:#e2e8f0; --dim:#94a3b8; --faint:#64748b;
+  --acc:#a78bfa; --acc2:#7c3aed; --C:#38bdf8;
+  --ok:#22c55e; --okbg:#0f2e1c; --bad:#ef4444; --badbg:#3b1717; --warn:#f59e0b; --warnbg:#3a2a0c;
+  --mark:#facc15; --markbg:rgba(250,204,21,.22);
+  --fs:16px;
+}
+@media (prefers-color-scheme: light){
+  :root{--bg:#f8fafc;--card:#ffffff;--card2:#f1f5f9;--line:#e2e8f0;--txt:#0f172a;--dim:#475569;--faint:#94a3b8;
+    --acc:#7c3aed;--acc2:#6d28d9;--C:#0284c7;--okbg:#e8f8ee;--badbg:#fdecec;--warnbg:#fff6e0;--markbg:rgba(250,204,21,.45)}
+}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--bg);color:var(--txt);
+  font-family:-apple-system,BlinkMacSystemFont,"Hiragino Sans","Segoe UI",sans-serif;
+  padding:env(safe-area-inset-top) 0 calc(env(safe-area-inset-bottom) + 76px);line-height:1.55}
+header{position:sticky;top:0;z-index:10;background:color-mix(in srgb,var(--bg) 92%,transparent);
+  backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);padding:10px 16px 8px;border-bottom:1px solid var(--line)}
+.hrow{display:flex;align-items:center;gap:8px}
+h1{font-size:16px;margin:0;flex:1}
+.fsbtn{background:var(--card2);border:1px solid var(--line);color:var(--txt);border-radius:8px;height:30px;min-width:34px;font-size:13px;font-weight:700}
+main{padding:14px 16px;max-width:640px;margin:0 auto}
+nav{position:fixed;left:0;right:0;bottom:0;z-index:10;display:flex;background:color-mix(in srgb,var(--bg) 94%,transparent);
+  backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);border-top:1px solid var(--line);padding:6px 8px calc(env(safe-area-inset-bottom) + 6px)}
+nav button{flex:1;background:none;border:none;color:var(--faint);font-size:11px;font-weight:600;padding:6px 0;display:flex;flex-direction:column;align-items:center;gap:2px}
+nav button .ic{font-size:20px;line-height:1}
+nav button.on{color:var(--txt)}
+.card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:14px;margin-bottom:12px}
+.muted{color:var(--dim);font-size:13px}
+.tiny{color:var(--faint);font-size:12px}
+.pill{display:inline-block;font-size:11px;font-weight:700;padding:2px 8px;border-radius:99px;background:var(--card2);color:var(--dim);border:1px solid var(--line)}
+.pill.b{color:var(--acc);border-color:color-mix(in srgb,var(--acc) 45%,transparent)}
+.pill.c{color:var(--C);border-color:color-mix(in srgb,var(--C) 45%,transparent)}
+.pill.past{color:var(--bad);border-color:color-mix(in srgb,var(--bad) 45%,transparent)}
+.pill.due{color:var(--warn);border-color:color-mix(in srgb,var(--warn) 45%,transparent)}
+.pill.okp{color:var(--ok);border-color:color-mix(in srgb,var(--ok) 45%,transparent)}
+.meta{display:flex;flex-wrap:wrap;gap:6px;align-items:center;margin-bottom:10px}
+.today h2{font-size:15px;margin:0 0 4px}
+.bigbtn{display:block;width:100%;border:none;border-radius:12px;padding:14px;font-size:15px;font-weight:700;color:#fff;margin-top:10px}
+.bigbtn.b{background:var(--acc2)} .bigbtn.c{background:#0369a1}
+.bigbtn.ghost{background:var(--card2);color:var(--txt);border:1px solid var(--line)}
+.stats{display:flex;gap:10px}
+.stat{flex:1;background:var(--card2);border-radius:10px;padding:10px;text-align:center}
+.stat b{display:block;font-size:20px}
+.stat span{font-size:11px;color:var(--dim)}
+/* item */
+.passage{font-size:var(--fs);line-height:1.7;font-family:Georgia,"Times New Roman","Hiragino Mincho ProN",serif}
+.passage h3{font-family:-apple-system,BlinkMacSystemFont,sans-serif;font-size:calc(var(--fs) - 1px);margin:0 0 8px}
+.passage p{margin:0 0 10px}
+.passage p:last-child{margin-bottom:0}
+mark{background:var(--markbg);color:inherit;border-bottom:2px solid var(--mark);padding:0 1px;border-radius:2px}
+.qbox{font-size:var(--fs);font-weight:700;margin:0 0 4px}
+.qja{font-size:13px;color:var(--dim);margin:0 0 10px}
+.opt{display:flex;gap:10px;width:100%;text-align:left;background:var(--card2);border:1.5px solid var(--line);color:var(--txt);
+  border-radius:12px;padding:12px;margin-bottom:8px;font-size:calc(var(--fs) - 1px);line-height:1.45}
+.opt .lt{flex:none;width:24px;height:24px;border-radius:7px;background:var(--line);display:flex;align-items:center;justify-content:center;font-weight:800;font-size:13px}
+.opt .ob{flex:1}
+.opt .why{display:block;font-size:13px;color:var(--dim);margin-top:6px;line-height:1.55}
+.opt .oja{display:block;font-size:13px;color:var(--txt);opacity:.85;margin-top:4px}
+.opt.right{border-color:var(--ok);background:var(--okbg)} .opt.right .lt{background:var(--ok);color:#fff}
+.opt.wrong{border-color:var(--bad);background:var(--badbg)} .opt.wrong .lt{background:var(--bad);color:#fff}
+.opt:disabled{opacity:1}
+.result{font-weight:800;font-size:16px;margin:4px 0 10px}
+.result.ok{color:var(--ok)} .result.ng{color:var(--bad)}
+.sec{margin-top:12px}
+.sec h4{font-size:12px;letter-spacing:.06em;color:var(--dim);margin:0 0 6px}
+.sec .body{font-size:14px;line-height:1.7}
+.point{background:color-mix(in srgb,var(--acc) 14%,var(--card));border:1px solid color-mix(in srgb,var(--acc) 40%,transparent);border-radius:12px;padding:12px;font-size:14px;line-height:1.65}
+.doubt{background:var(--warnbg);border:1px solid color-mix(in srgb,var(--warn) 50%,transparent);border-radius:12px;padding:10px 12px;font-size:13px;margin-top:10px}
+.pastnote{background:var(--badbg);border:1px solid color-mix(in srgb,var(--bad) 45%,transparent);border-radius:12px;padding:8px 12px;font-size:13px;margin-bottom:10px}
+details{background:var(--card2);border-radius:12px;padding:10px 12px;margin-top:10px}
+details summary{font-size:13px;font-weight:700;color:var(--dim);cursor:pointer;list-style:none}
+details summary::-webkit-details-marker{display:none}
+details summary::before{content:"▸ "} details[open] summary::before{content:"▾ "}
+details .body{font-size:14px;line-height:1.75;margin-top:8px}
+.navrow{display:flex;gap:8px;margin-top:14px}
+#after{scroll-margin-top:64px}
+.navrow button{flex:1}
+/* list */
+.chips{display:flex;gap:6px;overflow-x:auto;margin:0 -16px 12px;padding:0 16px;scrollbar-width:none}
+.chips::-webkit-scrollbar{display:none}
+.chip{flex:none;background:var(--card2);border:1px solid var(--line);color:var(--dim);border-radius:99px;padding:6px 12px;font-size:13px;font-weight:600}
+.chip.on{background:var(--txt);color:var(--bg);border-color:var(--txt)}
+.setblk{margin-bottom:16px}
+.setblk h3{font-size:13px;color:var(--dim);margin:0 0 8px;display:flex;justify-content:space-between}
+.row{display:flex;align-items:center;gap:10px;background:var(--card);border:1px solid var(--line);border-radius:12px;padding:10px 12px;margin-bottom:6px;width:100%;text-align:left;color:var(--txt);font-size:14px}
+.row .num{flex:none;width:34px;font-weight:800;color:var(--dim);font-size:13px}
+.row .tt{flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.dot{flex:none;width:10px;height:10px;border-radius:50%;background:var(--line)}
+.dot.ok{background:var(--ok)} .dot.ng{background:var(--bad)}
+.grid{display:grid;grid-template-columns:repeat(11,1fr);gap:3px}
+.cell{aspect-ratio:1;border-radius:3px;background:var(--line)}
+.cell.ok{background:var(--ok)} .cell.ng{background:var(--bad)} .cell.fix{background:#15803d;outline:1px solid var(--bad)}
+.legend{display:flex;gap:12px;flex-wrap:wrap;font-size:11px;color:var(--dim);margin-top:8px}
+.legend i{display:inline-block;width:9px;height:9px;border-radius:2px;margin-right:4px;vertical-align:-1px}
+.heat{display:grid;grid-template-columns:repeat(14,1fr);gap:3px;margin-top:6px}
+.heat div{aspect-ratio:1;border-radius:3px;background:var(--line)}
+.heat .l1{background:color-mix(in srgb,var(--acc) 40%,var(--line))} .heat .l2{background:color-mix(in srgb,var(--acc) 70%,var(--line))} .heat .l3{background:var(--acc)}
+.small-btns{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px}
+.small-btns button{background:var(--card2);border:1px solid var(--line);color:var(--txt);border-radius:10px;padding:8px 12px;font-size:13px}
+.empty{text-align:center;color:var(--dim);font-size:14px;padding:30px 10px}
+</style>
+</head>
+<body>
+<header>
+  <div class="hrow">
+    <h1 id="htitle">OET Reading 通勤ドリル</h1>
+    <button class="fsbtn" id="fsm" aria-label="文字を小さく">A−</button>
+    <button class="fsbtn" id="fsp" aria-label="文字を大きく">A+</button>
+  </div>
+</header>
+<main id="main"></main>
+<nav>
+  <button data-tab="today" class="on"><span class="ic">☀️</span>今日</button>
+  <button data-tab="B"><span class="ic">📄</span>Part B</button>
+  <button data-tab="C"><span class="ic">📖</span>Part C</button>
+  <button data-tab="log"><span class="ic">📊</span>記録</button>
+</nav>
+<script>
+const SETS = /*__DATA__*/[];
+const KEY = 'oet-reading-commute-v1';
+const INTERVALS = [1, 3, 7, 21];
+let S = load();
+function load(){
+  try { const s = JSON.parse(localStorage.getItem(KEY)); if (s && s.items) return Object.assign({days:{}, fs:16}, s); } catch(e){}
+  return {items:{}, days:{}, fs:16};
+}
+function save(){ try { localStorage.setItem(KEY, JSON.stringify(S)); } catch(e){} }
+
+/* ---------- helpers ---------- */
+const $ = s => document.querySelector(s);
+const esc = s => String(s).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const L = 'ABCD';
+function today(d = new Date()){ const z = n => String(n).padStart(2,'0'); return `${d.getFullYear()}-${z(d.getMonth()+1)}-${z(d.getDate())}`; }
+function addDays(ds, n){ const d = new Date(ds + 'T00:00:00'); d.setDate(d.getDate() + n); return today(d); }
+function pastLabel(it, letter){ return it.past ? `R${+it.set}で誤答` + (letter ? `（${it.past}を選択）` : '') : ''; }
+
+/* flatten items */
+const ITEMS = [];
+SETS.forEach(s => {
+  s.B.forEach(b => ITEMS.push(Object.assign({part:'B', set:s.id, id:`${s.id}-B${b.n}`}, b)));
+  s.C.forEach(c => ITEMS.push(Object.assign({part:'C', set:s.id, id:`${s.id}-C${c.n}`, text:s.texts[c.t]}, c)));
+});
+const BYID = Object.fromEntries(ITEMS.map(i => [i.id, i]));
+const rec = id => S.items[id];
+function status(it){
+  const r = rec(it.id);
+  if (!r) return 'new';
+  if (r.due && r.due <= today()) return 'due';
+  return r.lastOk ? 'ok' : 'ng';
+}
+function isWeak(it){ const r = rec(it.id); return (r && (!r.lastOk || r.wrong > 0)) || !!it.past; }
+
+/* queue: 復習期限切れ → 未回答（過去誤答を優先）→ 最も古く解いたもの */
+function nextItem(part, excludeId){
+  const pool = ITEMS.filter(i => i.part === part && i.id !== excludeId);
+  const t = today();
+  const due = pool.filter(i => { const r = rec(i.id); return r && r.due && r.due <= t; })
+                  .sort((a,b) => rec(a.id).due.localeCompare(rec(b.id).due));
+  if (due.length) return due[0];
+  const fresh = pool.filter(i => !rec(i.id));
+  const freshPast = fresh.filter(i => i.past);
+  if (freshPast.length) return freshPast[0];
+  if (fresh.length) return fresh[0];
+  return pool.slice().sort((a,b) => (rec(a.id).last || '').localeCompare(rec(b.id).last || ''))[0];
+}
+
+function answer(it, choice){
+  const ok = choice === it.key || (it.alt || []).includes(choice);
+  const t = today();
+  const r = S.items[it.id] || {n:0, wrong:0, box:0, hist:[]};
+  r.n++; if (!ok) r.wrong++;
+  r.lastOk = ok; r.last = t; r.hist.push([t, choice]); if (r.hist.length > 10) r.hist.shift();
+  if (ok) {
+    if (r.wrong === 0 && !it.past) { r.box = INTERVALS.length; r.due = null; }  // 初見で正解＝習得
+    else { r.box = Math.min((r.box || 0) + 1, INTERVALS.length); r.due = r.box >= INTERVALS.length ? null : addDays(t, INTERVALS[r.box]); }
+  } else { r.box = 0; r.due = addDays(t, INTERVALS[0]); }
+  S.items[it.id] = r;
+  S.days[t] = (S.days[t] || 0) + 1;
+  save();
+  return ok;
+}
+
+/* ---------- views ---------- */
+let TAB = 'today', FILTER = {B:'all', C:'all'}, VIEW = null; // VIEW = {id, from}
+function setTab(t){
+  TAB = t; VIEW = null;
+  document.querySelectorAll('nav button').forEach(b => b.classList.toggle('on', b.dataset.tab === t));
+  render(); window.scrollTo(0,0);
+}
+function render(){
+  if (VIEW) return renderItem(BYID[VIEW.id]);
+  ({today:renderToday, B:()=>renderList('B'), C:()=>renderList('C'), log:renderLog})[TAB]();
+}
+function streak(){
+  let n = 0, d = today();
+  if (!S.days[d]) d = addDays(d, -1);
+  while (S.days[d]) { n++; d = addDays(d, -1); }
+  return n;
+}
+function renderToday(){
+  $('#htitle').textContent = 'OET Reading 通勤ドリル';
+  const t = today(), done = S.days[t] || 0;
+  const dueB = ITEMS.filter(i => i.part==='B' && status(i)==='due').length;
+  const dueC = ITEMS.filter(i => i.part==='C' && status(i)==='due').length;
+  const nb = nextItem('B'), nc = nextItem('C');
+  const lbl = it => { const s = status(it); return s==='due' ? '<span class="pill due">復習</span>' : s==='new' ? (it.past ? `<span class="pill past">${pastLabel(it)}</span>` : '<span class="pill">未回答</span>') : '<span class="pill">再挑戦</span>'; };
+  $('#main').innerHTML = `
+    <div class="card"><div class="stats">
+      <div class="stat"><b>${done}</b><span>今日解いた数</span></div>
+      <div class="stat"><b>${streak()}</b><span>連続日数</span></div>
+      <div class="stat"><b>${dueB + dueC}</b><span>今日の復習</span></div>
+    </div></div>
+    <div class="card today">
+      <div class="meta"><span class="pill b">Part B</span>${lbl(nb)}<span class="tiny">Set${nb.set} · 問${nb.n}</span></div>
+      <h2>${esc(nb.title)}</h2>
+      <div class="muted">短文1本＋3択 → 和訳・選択肢ごとの正誤・解説・ポイント</div>
+      <button class="bigbtn b" data-go="${nb.id}">B を1問解く</button>
+    </div>
+    <div class="card today">
+      <div class="meta"><span class="pill c">Part C</span>${lbl(nc)}<span class="tiny">Set${nc.set} · 問${nc.n}</span></div>
+      <h2>${esc(nc.text.title)}</h2>
+      <div class="muted">該当段落1つ＋4択 → 根拠文ハイライト</div>
+      <button class="bigbtn c" data-go="${nc.id}">C を1問解く</button>
+    </div>
+    <p class="tiny">出題順：復習期限の来た問題 → 未回答（過去模試の誤答を優先）→ しばらく解いていない問題。間違えた問題は1→3→7→21日後に再出題。</p>`;
+  $('#main').querySelectorAll('[data-go]').forEach(b => b.onclick = () => openItem(b.dataset.go, 'today'));
+}
+function openItem(id, from){ VIEW = {id, from}; render(); window.scrollTo(0,0); }
+
+function renderList(part){
+  $('#htitle').textContent = part === 'B' ? 'Part B（6問×10セット）' : 'Part C（16問×10セット）';
+  const f = FILTER[part];
+  const chips = [['all','すべて'],['new','未回答'],['weak','苦手'],['due','復習'],['past','過去の誤答']];
+  const pass = it => f==='all' || (f==='new' && !rec(it.id)) || (f==='weak' && isWeak(it)) || (f==='due' && status(it)==='due') || (f==='past' && it.past);
+  let html = `<div class="chips">${chips.map(([k,v]) => `<button class="chip ${f===k?'on':''}" data-f="${k}">${v}</button>`).join('')}</div>`;
+  let any = false;
+  SETS.forEach(s => {
+    const its = ITEMS.filter(i => i.part===part && i.set===s.id && pass(i));
+    if (!its.length) return; any = true;
+    const all = ITEMS.filter(i => i.part===part && i.set===s.id);
+    const okN = all.filter(i => rec(i.id) && rec(i.id).lastOk).length;
+    html += `<div class="setblk"><h3><span>Set${s.id}${part==='C' ? ` · ${esc(s.texts[0].title)} / ${esc(s.texts[1].title)}` : ''}</span><span>${okN}/${all.length}</span></h3>`;
+    its.forEach(it => {
+      const st = status(it), r = rec(it.id);
+      const dot = !r ? '' : r.lastOk ? 'ok' : 'ng';
+      const title = part==='B' ? it.title : it.q;
+      html += `<button class="row" data-go="${it.id}"><span class="num">${part}${it.n}</span><span class="tt">${esc(title)}</span>${it.past?'<span class="pill past">R誤</span>':''}${st==='due'?'<span class="pill due">復習</span>':''}<span class="dot ${dot}"></span></button>`;
+    });
+    html += '</div>';
+  });
+  if (!any) html += '<div class="empty">該当する問題はありません</div>';
+  $('#main').innerHTML = html;
+  $('#main').querySelectorAll('[data-f]').forEach(b => b.onclick = () => { FILTER[part] = b.dataset.f; render(); });
+  $('#main').querySelectorAll('[data-go]').forEach(b => b.onclick = () => openItem(b.dataset.go, part));
+}
+
+function highlight(text, ev){
+  const i = text.indexOf(ev);
+  if (i < 0) return esc(text);
+  return esc(text.slice(0,i)) + '<mark>' + esc(ev) + '</mark>' + esc(text.slice(i + ev.length));
+}
+function renderItem(it){
+  const r = rec(it.id);
+  const isB = it.part === 'B';
+  $('#htitle').textContent = `Set${it.set} · Part ${it.part} 問${it.n}`;
+  const meta = `<div class="meta"><span class="pill ${isB?'b':'c'}">Part ${it.part}</span>
+      ${isB ? '' : `<span class="pill">Text${it.t+1}「${esc(it.text.title)}」第${it.p+1}段落</span>`}
+      ${r ? `<span class="pill ${r.lastOk?'okp':'past'}">前回 ${r.lastOk?'正解':'不正解'}（${r.n}回目済）</span>` : ''}</div>`;
+  const past = it.past ? `<div class="pastnote" id="pastnote">📌 ${pastLabel(it)}した問題。同じ罠にかからないか確認。</div>` : '';
+  const passage = isB
+    ? `<div class="card passage" id="psg"><h3>${esc(it.title)}</h3>${it.paras.map(p => `<p>${esc(p)}</p>`).join('')}</div>`
+    : `<div class="card passage" id="psg"><p>${esc(it.text.paras[it.p])}</p></div>`;
+  const opts = it.opts.map((o,i) => `<button class="opt" data-c="${L[i]}"><span class="lt">${L[i]}</span><span class="ob">${esc(o)}</span></button>`).join('');
+  $('#main').innerHTML = `${meta}${past}${passage}
+    <div class="card">
+      <div class="qbox">${it.n}. ${esc(it.q)}</div>
+      ${isB ? `<div class="qja">${esc(it.qja)}</div>` : ''}
+      <div id="opts">${opts}</div>
+      <div id="after"></div>
+    </div>`;
+  $('#opts').querySelectorAll('.opt').forEach(b => b.onclick = () => reveal(it, b.dataset.c));
+}
+function reveal(it, choice){
+  const ok = answer(it, choice);
+  const isB = it.part === 'B';
+  const accepted = [it.key, ...(it.alt || [])];
+  $('#opts').querySelectorAll('.opt').forEach((b,i) => {
+    const l = L[i]; b.disabled = true;
+    if (accepted.includes(l)) b.classList.add('right');
+    else if (l === choice) b.classList.add('wrong');
+    if (isB) {
+      const [oja, why] = it.o[i];
+      b.querySelector('.ob').insertAdjacentHTML('beforeend', `<span class="oja">${esc(oja)}</span><span class="why">${esc(why)}</span>`);
+    }
+  });
+  if (it.past) $('#pastnote').textContent = `📌 ${pastLabel(it, true)}。今回は ${choice}${ok ? ' → 克服 🎉' : ' → 要復習'}`;
+  if (!isB) $('#psg').innerHTML = `<p>${highlight(it.text.paras[it.p], it.ev)}</p>`;
+  const res = `<div class="result ${ok?'ok':'ng'}">${ok ? '✅ 正解' : `❌ 不正解 — 正解は ${it.key}`}${(it.alt||[]).length ? `（${it.alt.join('/')}も正解扱い）` : ''}</div>`;
+  const doubt = it.doubt ? `<div class="doubt">${esc(it.doubt)}</div>` : '';
+  const body = isB
+    ? `<div class="sec"><h4>解説</h4><div class="body">${esc(it.exp)}</div></div>
+       <div class="sec"><h4>ポイント</h4><div class="point">${esc(it.pt)}</div></div>${doubt}
+       <details><summary>本文の和訳</summary><div class="body">${esc(it.ja)}</div></details>`
+    : `<div class="sec"><h4>根拠（黄色マーカー）</h4><div class="point">${esc(it.note)}</div></div>${doubt}`;
+  const nextLbl = VIEW.from === 'today' ? `次の${it.part}へ` : '次の問題';
+  $('#after').innerHTML = `${res}${body}
+    <div class="navrow"><button class="bigbtn ghost" id="back">戻る</button><button class="bigbtn ${isB?'b':'c'}" id="next">${nextLbl} →</button></div>`;
+  $('#back').onclick = () => { VIEW = null; render(); window.scrollTo(0,0); };
+  $('#next').onclick = () => {
+    let n;
+    if (VIEW.from === 'today') n = nextItem(it.part, it.id);
+    else { const list = ITEMS.filter(i => i.part === it.part); n = list[(list.indexOf(it) + 1) % list.length]; }
+    openItem(n.id, VIEW.from);
+  };
+  $('#after').scrollIntoView({behavior:'smooth', block:'start'});
+}
+
+function renderLog(){
+  $('#htitle').textContent = '記録';
+  const acc = part => {
+    const rs = ITEMS.filter(i => i.part===part).map(i => rec(i.id)).filter(Boolean);
+    const n = rs.reduce((a,r) => a + r.n, 0), w = rs.reduce((a,r) => a + r.wrong, 0);
+    return {seen: rs.length, total: ITEMS.filter(i => i.part===part).length, rate: n ? Math.round((n - w) / n * 100) : null, now: rs.filter(r => r.lastOk).length};
+  };
+  const a = acc('B'), c = acc('C');
+  const cells = part => SETS.map(s => {
+    const its = ITEMS.filter(i => i.part===part && i.set===s.id);
+    return `<div class="tiny" style="margin:6px 0 3px">Set${s.id}</div><div class="grid" style="grid-template-columns:repeat(16,1fr)">` +
+      its.map(i => { const r = rec(i.id); const cls = !r ? '' : r.lastOk ? (r.wrong ? 'fix' : 'ok') : 'ng'; return `<div class="cell ${cls}" title="${i.id}"></div>`; }).join('') + '</div>';
+  }).join('');
+  let heat = '';
+  for (let k = 27; k >= 0; k--) { const d = addDays(today(), -k), n = S.days[d] || 0; heat += `<div class="${n>=6?'l3':n>=3?'l2':n>=1?'l1':''}" title="${d}: ${n}問"></div>`; }
+  const weakC = ITEMS.filter(i => rec(i.id) && !rec(i.id).lastOk).length;
+  $('#main').innerHTML = `
+    <div class="card"><div class="stats">
+      <div class="stat"><b>${a.rate ?? '–'}${a.rate!=null?'%':''}</b><span>B 正答率（${a.seen}/${a.total}問）</span></div>
+      <div class="stat"><b>${c.rate ?? '–'}${c.rate!=null?'%':''}</b><span>C 正答率（${c.seen}/${c.total}問）</span></div>
+      <div class="stat"><b>${weakC}</b><span>現在の苦手</span></div>
+    </div></div>
+    <div class="card"><div class="muted">直近4週間（連続 ${streak()} 日）</div><div class="heat">${heat}</div></div>
+    <div class="card"><div class="muted">Part B</div>${cells('B')}
+      <div class="legend"><span><i style="background:var(--ok)"></i>正解</span><span><i style="background:#15803d;outline:1px solid var(--bad)"></i>ミス後に正解</span><span><i style="background:var(--bad)"></i>直近不正解</span><span><i style="background:var(--line)"></i>未回答</span></div></div>
+    <div class="card"><div class="muted">Part C</div>${cells('C')}</div>
+    <div class="card"><div class="muted">データ（この端末のみに保存）</div>
+      <div class="small-btns"><button id="exp">バックアップをコピー</button><button id="imp">バックアップから復元</button><button id="rst">全記録をリセット</button></div></div>`;
+  $('#exp').onclick = async () => { const t = JSON.stringify(S); try { await navigator.clipboard.writeText(t); alert('コピーしました'); } catch(e) { prompt('このテキストを保存してください', t); } };
+  $('#imp').onclick = () => { const t = prompt('バックアップのテキストを貼り付け'); if (!t) return; try { const s = JSON.parse(t); if (!s.items) throw 0; S = Object.assign({days:{}, fs:16}, s); save(); applyFs(); render(); alert('復元しました'); } catch(e) { alert('形式が正しくありません'); } };
+  $('#rst').onclick = () => { if (confirm('すべての回答記録を消去します。よろしいですか？')) { S = {items:{}, days:{}, fs:S.fs}; save(); render(); } };
+}
+
+/* font size */
+function applyFs(){ document.documentElement.style.setProperty('--fs', S.fs + 'px'); }
+$('#fsm').onclick = () => { S.fs = Math.max(13, S.fs - 1); applyFs(); save(); };
+$('#fsp').onclick = () => { S.fs = Math.min(22, S.fs + 1); applyFs(); save(); };
+document.querySelectorAll('nav button').forEach(b => b.onclick = () => setTab(b.dataset.tab));
+applyFs(); render();
+if ('serviceWorker' in navigator && location.protocol === 'https:') navigator.serviceWorker.register('sw.js').catch(() => {});
+</script>
+</body>
+</html>
