@@ -1,6 +1,6 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { loadApp, norm } from './harness.mjs';
+import { loadApp } from './harness.mjs';
 
 const TODAY = '2026-09-21T09:00:00+09:00';
 const app = () => loadApp({ today: TODAY });
