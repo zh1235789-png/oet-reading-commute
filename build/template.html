@@ -79,6 +79,12 @@ mark{background:var(--markbg);color:inherit;border-bottom:2px solid var(--mark);
 .sec{margin-top:12px}
 .sec h4{font-size:12px;letter-spacing:.06em;color:var(--dim);margin:0 0 6px}
 .sec .body{font-size:14px;line-height:1.7}
+.voc{border:1px solid var(--line);border-radius:12px;overflow:hidden}
+.voc .vrow{display:flex;gap:10px;padding:7px 10px;font-size:13.5px;line-height:1.5;border-top:1px solid var(--line)}
+.voc .vrow:first-child{border-top:none}
+.voc .vrow:nth-child(odd){background:var(--card2)}
+.voc .w{flex:0 0 42%;font-weight:700}
+.voc .m{flex:1;color:var(--dim)}
 .point{background:color-mix(in srgb,var(--acc) 14%,var(--card));border:1px solid color-mix(in srgb,var(--acc) 40%,transparent);border-radius:12px;padding:12px;font-size:14px;line-height:1.65}
 .doubt{background:var(--warnbg);border:1px solid color-mix(in srgb,var(--warn) 50%,transparent);border-radius:12px;padding:10px 12px;font-size:13px;margin-top:10px}
 .pastnote{background:var(--badbg);border:1px solid color-mix(in srgb,var(--bad) 45%,transparent);border-radius:12px;padding:8px 12px;font-size:13px;margin-bottom:10px}
@@ -379,11 +385,15 @@ function reveal(it, choice){
   if (!isB) $('#psg').innerHTML = `<p>${highlight(it.text.paras[it.p], it.ev)}</p>`;
   const res = `<div class="result ${ok?'ok':'ng'}">${ok ? '✅ 正解' : `❌ 不正解 — 正解は ${it.key}`}${(it.alt||[]).length ? `（${it.alt.join('/')}も正解扱い）` : ''}</div>`;
   const doubt = it.doubt ? `<div class="doubt">${esc(it.doubt)}</div>` : '';
+  const voc = (it.voc && it.voc.length)
+    ? `<div class="sec"><h4>語彙（${it.voc.length}）</h4><div class="voc">${
+        it.voc.map(([w, ja]) => `<div class="vrow"><span class="w">${esc(w)}</span><span class="m">${esc(ja)}</span></div>`).join('')
+      }</div></div>` : '';
   const body = isB
     ? `<div class="sec"><h4>解説</h4><div class="body">${esc(it.exp)}</div></div>
-       <div class="sec"><h4>ポイント</h4><div class="point">${esc(it.pt)}</div></div>${doubt}
+       <div class="sec"><h4>ポイント</h4><div class="point">${esc(it.pt)}</div></div>${doubt}${voc}
        <details><summary>本文の和訳</summary><div class="body">${esc(it.ja)}</div></details>`
-    : `<div class="sec"><h4>根拠（黄色マーカー）</h4><div class="point">${esc(it.note)}</div></div>${doubt}`;
+    : `<div class="sec"><h4>根拠（黄色マーカー）</h4><div class="point">${esc(it.note)}</div></div>${doubt}${voc}`;
   const nextLbl = VIEW.from === 'today' ? `次の${it.part}へ` : '次の問題';
   $('#after').innerHTML = `${res}${body}
     <div class="navrow"><button class="bigbtn ghost" id="back">戻る</button><button class="bigbtn ${isB?'b':'c'}" id="next">${nextLbl} →</button></div>`;

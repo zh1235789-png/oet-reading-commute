@@ -1,0 +1,28 @@
+{
+"B": [
+[["batch","製造ロット"],["recalled","回収された"],["tendency","傾向"],["burst","破れる・破裂する"],["expiry date","使用期限"],["prompt","促す・きっかけとなる"],["use-by date","使用期限"],["precaution","予防策"],["likelihood","可能性"],["consequence","結果"],["discard","廃棄する"]],
+[["comprehensive","包括的な"],["timely","適時の"],["elective surgery","待機（予定）手術"],["metropolitan","都市部の"],["medical practitioner","医師"],["authorised delegate","権限を委任された者"],["admission","入院"],["booking list","予約リスト"],["clinical urgency category","臨床的な緊急度区分"],["consistent","一貫した"],["structured approach","体系立てたやり方"],["provision","提供"],["publicly funded","公費による"]],
+[["cesarean section","帝王切開"],["induce","（陣痛を）誘発する"],["labor","陣痛・分娩"],["break her waters","破水させる"],["contract","収縮する"],["bring on","引き起こす"],["deliberately","意図的に"],["overdue","予定日を過ぎた"],["trickier","より難しい"],["given birth","出産した"],["randomly sorted","無作為に振り分けられた"],["expectant management","待機的管理（経過を見る方針）"],["selection criteria","選択基準"]],
+[["anticoagulant","抗凝固薬"],["sensitivity","感受性"],["warfarin","ワルファリン"],["dosing","用量設定"],["routine monitoring","定期的な経過観察"],["overcome","克服する"],["bleeding","出血"],["drug interaction","薬物相互作用"],["consulted","参照される"],["OTC drug","市販薬"],["supplement","サプリメント"],["impaired renal function","腎機能障害"],["review","見直し・再評価"]],
+[["musculoskeletal","筋骨格系の"],["arthritis","関節炎"],["osteoarthritis","変形性関節症"],["degenerative","変性の・退行性の"],["weight-bearing joint","体重のかかる関節"],["spine","脊椎"],["rheumatoid arthritis","関節リウマチ"],["autoimmune disease","自己免疫疾患"],["wear and tear","摩耗・使い古し"],["confined to","〜に限られる"],["osteoporosis","骨粗鬆症"],["preventable","予防できる"],["bone density","骨密度"],["skeleton","骨格"],["fracture","骨折"],["deteriorating","悪化していく"]],
+[["pressure injury","褥瘡（床ずれ）"],["inevitable","避けられない"],["risk assessment tool","リスク評価ツール"],["rate","評価する・格付けする"],["implement","実施する"],["in isolation of","〜から切り離して"],["skills mix","職種・技能の構成"],["come into play","効いてくる・関わってくる"],["commissioned","委託された"],["in conjunction with","〜と共同で"],["registered nurse","正看護師"],["enrolled nurse","准看護師"],["restorative care","回復期のケア"],["equipped with","〜を備えた"],["undertake","引き受ける・実施する"],["commence","開始する"],["institute","（制度などを）設ける"]]
+],
+"C": [
+[["déjà vu","既視感（デジャヴ）"],["the majority of","〜の大多数"],["population","人口・集団"],["infer","推測させる"]],
+[["radical notion","極端な考え"],["momentarily","一瞬の間"],["align with","〜と重なる・一致する"],["past life","前世"],["parallel universe","並行宇宙"],["neurological basis","神経学的な基盤"],["given rise to","生じさせた"],["interpretation","解釈"]],
+[["here one minute and gone the next","現れたかと思えばすぐ消える"],["even so","それでも"],["hypothesis","仮説"],["posited","提唱された"],["mismatched","かみ合わない"],["transported","運ばれる（感覚になる）"],["mistake it for","それを〜と取り違える"],["reincarnation","輪廻転生"],["fleeting","つかの間の"]],
+[["piece together","つなぎ合わせる"],["misfiring","誤作動・誤発火"],["recall memory","記憶を呼び起こす"],["decipher","読み解く"],["sensory input","感覚入力"],["proper channel","本来の経路"],["leak out of","〜から漏れ出す"],["geometric shape","幾何学的な形"],["unfamiliar","なじみのない"],["parapsychological","超心理学的な"],["mechanism","仕組み"]],
+[["aware of","気づいている"],["take place","起こる"],["recognition memory","再認記憶"],["confronting","出くわしている"],["landmark","目印となる建物・場所"],["across the room","部屋の反対側から"],["participate","関与する"]],
+[["familiarity-based recognition","なじみ感に基づく再認"],["can't quite place","どこで見たか思い出せない"],["for instance","たとえば"],["fragment","断片"],["overlap","重なり"],["interpret","解釈する"],["come into existence","生じる"]],
+[["epileptic","てんかんの（患者）"],["breakthrough","大きな進展"],["intractable","難治性の"],["electrode","電極"],["seizure","発作"],["medial temporal lobe","内側側頭葉"],["rhinal cortex","嗅内（鼻周囲）皮質"],["hippocampus","海馬"],["firing current","電流を流すこと"],["trigger","引き起こす"],["transmitting","送り込むこと"],["subjected to","〜を受ける"]],
+[["stranger still","さらに奇妙なことに"],["chronic","慢性の"],["senior citizen","高齢者"],["encounter","遭遇する"],["on a consistent basis","常日頃から"],["clairvoyant","予知能力のある"],["outcome","結末・結果"],["fortune teller","占い師"],["sufferer","その症状をもつ人"]],
+[["nasty side effect","厄介な副作用"],["building blocks","構成要素"],["continually","絶え間なく"],["one shot does it all","1回で全部済む"],["gene therapy","遺伝子治療"],["attributed to","〜によるものとされる"]],
+[["deliver","送り届ける"],["custom virus","特別に作ったウイルス"],["infect","感染させる"],["target cell","標的細胞"],["flies under the immune system's radar","免疫に気づかれずにすり抜ける"],["genetic material","遺伝物質"],["reproduce","増殖する"],["escape","逃れる"]],
+[["approved by","〜に承認された"],["ongoing","進行中の"],["cutting-edge","最先端の"],["lipoprotein lipase deficiency","リポ蛋白リパーゼ欠損症"],["break down fat","脂肪を分解する"],["combined immune deficiency","複合免疫不全症"],["eligible","適応となる"],["muscular dystrophy","筋ジストロフィー"]],
+[["evaluate","評価する"],["safety profile","安全性の特徴"],["proper dosage","適切な用量"],["go wrong","うまくいかない"],["altered","改変された"],["original form","元の形"],["approached","近づかれる・取り込まれる"],["tumor","腫瘍"],["ensure","確実にする"],["costly","費用のかかる"]],
+[["stumbling block","つまずきの石・障害"],["keep in mind","心に留めておく"],["monitored","監視される"],["went bust","頓挫しかけた"],["react violently","激しい反応を起こす"],["lost its innocence","純真さを失った（幻想が崩れた）"],["setting the field back","その分野を後退させること"],["leukemia","白血病"],["obstacle","障害"]],
+[["incident","出来事・事故"],["cease","中止する"],["funding was pulled","資金が引き揚げられた"],["disturbing","衝撃的な・心を乱す"],["tragedy","悲劇"],["stringent","厳格な"],["in place","整備された状態で"],["set off","（反応を）引き起こす"],["protocol","手順"]],
+[["efficacy","有効性"],["constant","一定の"],["varies from one condition to the next","疾患ごとに異なる"],["impressive","目を見張る"],["a small clutch of","ごく少数の"],["cured","治癒した"],["hemophilia","血友病"],["retinitis pigmentosa","網膜色素変性症"],["remarkable","注目に値する"]],
+[["encouraging","期待の持てる"],["congestive heart failure","うっ血性心不全"],["disappointing","期待外れの"],["a mixed bag","良し悪しが入り混じったもの"],["overcome","克服する"],["take out","排除する"],["viral messenger","遺伝子を運ぶウイルス"],["failure","失敗"]]
+]
+}

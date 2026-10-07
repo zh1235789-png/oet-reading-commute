@@ -1,0 +1,28 @@
+{
+"B": [
+[["respiratory disease","呼吸器疾患"],["croup","クループ"],["bronchiolitis","細気管支炎"],["resource-poor","資源の乏しい"],["telehealth","遠隔医療"],["clinical assessment","臨床的な評価"],["investigation","検査"],["spontaneously","自発的に"],["voluntarily","意識的に・自分の意思で"],["assent","（小児の）同意・了承"],["respiratory distress","呼吸窮迫"],["abdominal","腹部の"],["disorder","疾患・障害"]],
+[["interpreter","通訳者"],["accredited","認定された"],["preferred language","希望する言語"],["in person","対面で"],["medical terminology","医学用語"],["antenatal appointment","妊婦健診"],["competence","能力・技能"],["bound by","〜に拘束される"],["code of ethics","倫理綱領"],["confidentiality","守秘義務"],["shortage","不足"],["emerging community","新しく形成されつつある地域社会"],["availability","確保できること"],["language barrier","言葉の壁"]],
+[["keep track of","把握し続ける"],["get well","回復する"],["side effect","副作用"],["allergic reaction","アレルギー反応"],["swallow","飲み込む"],["straight away","すぐに"],["care provider","ケアを提供する側（施設・担当者）"],["instruction","指示・使い方"],["clarify","はっきりさせる"],["direction","指示・用法"]],
+[["escalation process","上位へ引き上げる手順"],["dispute resolution","紛争の解決"],["inpatient team","入院担当チーム"],["admission","入院"],["respective specialty","当該の診療科"],["onward referral","次の科への紹介"],["alternate specialty","別の診療科"],["clinical handover","臨床上の引き継ぎ"],["time frame","期限・時間枠"],["convene","招集する"],["timely","時機を逸しない"],["unresolved","解決しないままの"],["executive director","担当役員"]],
+[["cuff","（血圧計の）カフ・腕帯"],["circumference","周囲径"],["palpate","触診する"],["brachial artery","上腕動脈"],["snugly","ぴったりと"],["antecubital fossa","肘窩（ひじの内側のくぼみ）"],["crease","しわ・折れ目"],["preliminary","予備の"],["systolic blood pressure","収縮期血圧"],["non-dominant hand","利き手でない方の手"],["inflate","膨らませる"],["bladder","（カフの）空気袋"],["sphygmomanometer","血圧計"],["deflate","空気を抜く"],["recirculate","再び巡る"],["crook of the elbow","ひじの内側のくぼみ"]],
+[["automated","自動の"],["notification","通知"],["admitted","入院した"],["discharged","退院した"],["nominated GP","指定のかかりつけ医"],["enrollment confirmation","登録確認"],["commence","開始する"],["contact details","連絡先"],["adequate privacy","十分なプライバシー保護"],["transmission","送信"]]
+],
+"C": [
+[["heart failure","心不全"],["weakened","弱った"],["experimental drug","試験段階の薬"],["repair","修復する"],["phase 1 trial","第1相試験"],["intravenous infusion","点滴静注"],["high dose","高用量"],["indefinitely","無期限に"]],
+[["lead researcher","主任研究者"],["dysfunction","機能不全"],["be on a therapy","治療を受けている"],["significant","かなりの・有意な"]],
+[["a combination of drugs","複数の薬の組み合わせ"],["diuretic","利尿薬"],["excess fluid","余分な体液"],["build up","たまる"],["labored","（働きが）苦しい・負担の大きい"],["defibrillator","除細動器"],["pacemaker","ペースメーカー"],["death rate","死亡率"],["unacceptably","容認できないほど"],["get rid of","取り除く"]],
+[["meet the body's needs","体の必要を満たす"],["leading cause of death","主要な死因"],["respond well to","〜によく反応する"],["left lower heart chamber","左心室"],["artery","動脈"],["requirement","必要量・要件"]],
+[["growth factor","成長因子"],["bind to","〜に結合する"],["receptor","受容体"],["cellular repair","細胞の修復"],["survival","生存"],["aid","助ける"],["recovery process","回復の過程"],["enhance","高める"]],
+[["effectiveness","有効性"],["prove its worth","価値を証明する"],["progressively larger","段階的に大きくなる"],["challenging","負荷の大きい・厳しい"],["approved by","〜に承認される"],["preliminary findings","予備的な結果"],["experimental phase","試験段階"],["consideration","考慮事項"]],
+[["randomly assigned","無作為に割り付けられた"],["placebo","プラセボ（偽薬）"],["sustained increase","持続的な改善"],["last","続く"],["side effect","副作用"],["abnormal liver function","肝機能異常"],["clear up","回復する・解消する"],["adverse","有害な"]],
+[["suitable title","ふさわしい見出し"],["promising","有望な"],["show promise","見込みを示す"],["for the first time in humans","ヒトで初めて"],["a bright future ahead","明るい前途"]],
+[["swing between","〜の間で揺れ動く"],["dire warning","深刻な警告"],["cheery promise","明るい期待・約束"],["caffeinated beverage","カフェイン入り飲料"],["regarding","〜に関して"],["beneficial","有益な"],["harmful","有害な"]],
+[["suspected carcinogen","発がん性が疑われる物質"],["took coffee off its list","コーヒーをリストから外した"],["colon cancer","大腸がん"],["coming back","再発すること"],["stave off","食い止める・遠ざける"],["odds","可能性・見込み"],["prostate cancer","前立腺がん"],["prevention","予防"]],
+[["pinpoint","正確に突き止める"],["compound","化合物・成分"],["antioxidant","抗酸化物質"],["boost the immune system","免疫を高める"],["polyphenol","ポリフェノール"],["cholesterol","コレステロール"],["formation of plaques","プラークの形成"],["brain-damaging","脳を損なう"],["attributed to","〜によるものとされる"]],
+[["separate out","切り分ける"],["ingredient","成分"],["body system","体の各系統"],["GI disease","消化器疾患"],["critical care medicine","集中治療医学"],["determine","見極める・判断する"]],
+[["buildup of calcium","カルシウムの蓄積"],["supply blood to","〜に血液を送る"],["either way","どちらの方向にも"],["significant in itself","それ自体が重要な"],["coronary artery disease","冠動脈疾患"],["risk factor","危険因子"],["neutral","どちらでもない・中立の"],["noteworthy","注目に値する"]],
+[["complex beverage","成分が複雑な飲み物"],["a variety of","さまざまな"],["cancer-fighting properties","抗がん作用"],["dietitian","管理栄養士"],["dynamic interaction","動的な相互作用"],["isolated","単離された"],["relations among","〜の間の関係"]],
+[["gastrointestinal","消化管の"],["regular drinking","習慣的に飲むこと"],["linear association","直線的な関連"],["recurrence","再発"],["contribute to","〜に寄与する"],["counsel","助言する"],["obesity","肥満"],["measure","対策"],["proportional to","〜に比例する"]],
+[["play into","〜に影響する"],["genetics","遺伝（的要因）"],["went together","切り離せないものだった"],["process","（体内で）処理する"],["preference for","〜を好むこと"],["reflect","反映する"],["associated","関連がある"],["maintain weight","体重を保つ"]]
+]
+}
