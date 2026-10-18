@@ -14,6 +14,15 @@ for sid in sorted(base):
     s = base[sid]; a = json.load(open(f'{D}/ann/{sid}.json'))
     texts = [dict(title=t['title'], paras=[norm(p) for p in t['paras']]) for t in s['texts']]
     voc = json.load(open(f'{D}/ann/vocab/{sid}.json'))
+    copts = json.load(open(f'{D}/ann/copts/{sid}.json'))
+    # 件数が合わないまま進むと、IndexError で止まるか、余った訳が黙って捨てられる。
+    # assert は python -O で消えるので、データ検証には使わない（2026-10-18 Codex指摘）。
+    def need(cond, msg):
+        if not cond:
+            raise SystemExit(f'ビルド中止 Set{sid}: {msg}')
+    need(len(voc['B']) == len(s['B']) and len(voc['C']) == len(s['C']), 'vocab の件数が問題数と一致しません')
+    need(len(copts['C']) == len(s['C']), 'copts の件数が問題数と一致しません')
+    need(all(len(x) == len(c['opts']) for x, c in zip(copts['C'], s['C'])), 'copts の選択肢数が一致しません')
     B = []
     for i,b in enumerate(s['B']):
         x = a['B'][i]
@@ -26,7 +35,7 @@ for sid in sorted(base):
         p = [j for j,pp in enumerate(paras) if norm(x['ev']) in pp]; assert len(p)==1, (sid, c['n'])
         C.append(dict(n=c['n'], t=c['t'], p=p[0], q=norm(c['q']), opts=[norm(o) for o in c['opts']], key=c['key'], ev=norm(x['ev']),
                       note=x['note'], doubt=x.get('doubt'), alt=x.get('alt',[]),
-                      voc=voc['C'][i], past=PAST.get(sid,{}).get(f"C{c['n']}")))
+                      voc=voc['C'][i], oja=copts['C'][i], past=PAST.get(sid,{}).get(f"C{c['n']}")))
     sets.append(dict(id=sid, texts=texts, B=B, C=C))
 data = json.dumps(sets, ensure_ascii=False, separators=(',',':'))
 tpl = open(f'{D}/template.html', encoding='utf-8').read()

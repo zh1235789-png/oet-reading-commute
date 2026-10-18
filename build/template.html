@@ -379,6 +379,9 @@ function reveal(it, choice){
     if (isB) {
       const [oja, why] = it.o[i];
       b.querySelector('.ob').insertAdjacentHTML('beforeend', `<span class="oja">${esc(oja)}</span><span class="why">${esc(why)}</span>`);
+    } else if (it.oja && it.oja[i]) {
+      // Cは選択肢の和訳だけ（誤答の理由は根拠欄に書いてある）
+      b.querySelector('.ob').insertAdjacentHTML('beforeend', `<span class="oja">${esc(it.oja[i])}</span>`);
     }
   });
   if (it.past) $('#pastnote').textContent = `📌 ${pastLabel(it, true)}。今回は ${choice}${ok ? ' → 克服 🎉' : ' → 要復習'}`;
