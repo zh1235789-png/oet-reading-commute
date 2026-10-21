@@ -3185,5 +3185,105 @@
     "key": "C"
    }
   ]
+ },
+ "O1": {
+  "B": [
+   {
+    "q": "If vaccines have been stored incorrectly,",
+    "opts": [
+     "this should be reported.",
+     "staff should dispose of them securely.",
+     "they should be sent back to the supplier."
+    ],
+    "title": "Manual extract: effective cold chain",
+    "paras": [
+     "The cold chain is the system of transporting and storing vaccines within the temperature range of +2°C to +8°C from the place of manufacture to the point of administration. Maintenance of the cold chain is essential for maintaining vaccine potency and, in turn, vaccine effectiveness.",
+     "Purpose-built vaccine refrigerators (PBVR) are the preferred means of storage for vaccines. Domestic refrigerators are not designed for the special temperature needs of vaccine storage.",
+     "Despite best practices, cold chain breaches sometimes occur. Do not discard or use any vaccines exposed to temperatures below +2°C or above +8°C without obtaining further advice. Isolate vaccines and contact the state or territory public health bodies for advice on the National Immunisation Program vaccines and the manufacturer for privately purchased vaccines."
+    ],
+    "key": "A",
+    "n": 1
+   },
+   {
+    "q": "According to the extract, prior to making a home visit, nurses must",
+    "opts": [
+     "record the time they leave the practice.",
+     "refill their bag with necessary items.",
+     "communicate their intentions to others."
+    ],
+    "title": "Nurse home visit guidelines",
+    "paras": [
+     "When the nurse is ready to depart, he/she must advise a minimum of two staff members that he/she is commencing home visits, with one staff member responsible for logging the nurse’s movements. More than one person must be made aware of the nurse’s movements; failure to do so could result in the breakdown of communication and increased risk to the nurse and/or practice.",
+     "On return to the practice, the nurse will immediately advise staff members of his/ her return. This time will be documented on the patient visit list, and then scanned and filed by administration staff. The nurse will then attend to any specimens, cold chain requirements, restocking of the nurse kit and biohazardous waste."
+    ],
+    "key": "C",
+    "n": 2
+   },
+   {
+    "q": "What is being described in this section of the guidelines?",
+    "opts": [
+     "changes in procedures",
+     "best practice procedures",
+     "exceptions to the procedures"
+    ],
+    "title": "Guidelines for dealing with hospital waste",
+    "paras": [
+     "All biological waste must be carefully stored and disposed of safely. Contaminated materials such as blood bags, dirty dressings and disposable needles are also potentially hazardous and must be treated accordingly. If biological waste and contaminated materials are not disposed of properly, staff and members of the community could be exposed to infectious material and become infected. It is essential for the hospital to have protocols for dealing with biological waste and contaminated materials. All staff must be familiar with them and follow them.",
+     "The disposal of biohazardous materials is time-consuming and expensive, so it is important to separate out non-contaminated waste such as paper, packaging and non-sterile materials. Make separate disposal containers available where waste is created so that staff can sort the waste as it is being discarded."
+    ],
+    "key": "B",
+    "n": 3
+   },
+   {
+    "q": "When is it acceptable for a health professional to pass on confidential information given by a patient?",
+    "opts": [
+     "if non-disclosure could adversely affect those involved",
+     "if the patient’s treatment might otherwise be compromised",
+     "if the health professional would otherwise be breaking the law"
+    ],
+    "title": "Extract from guidelines: Patient Confidentiality",
+    "paras": [
+     "Where a patient objects to information being shared with other health professionals involved in their care, you should explain how disclosure would benefit the continuity and quality of care. If their decision has implications for the proposed treatment, it will be necessary to inform the patient of this. Ultimately if they refuse, you must respect their decision, even if it means that for reasons of safety you must limit your treatment options. You should record their decision within their clinical notes.",
+     "It may be in the public interest to disclose information received in confidence without consent, for example, information about a serious crime. It is important that confidentiality may only be broken in this way in exceptional circumstances and then only after careful consideration. This means you can justify your actions and point out the possible harm to the patient or other interested parties if you hadn’t disclosed the information. Theft, fraud or damage to property would generally not warrant a breach of confidence."
+    ],
+    "key": "A",
+    "n": 4
+   },
+   {
+    "q": "The purpose of the email to practitioners about infection control obligations is to",
+    "opts": [
+     "act as a reminder of their obligations.",
+     "respond to a specific query they have raised.",
+     "announce a change in regulations affecting them."
+    ],
+    "title": "Email from Dental Board of Australia",
+    "paras": [
+     "Dear Practitioner,",
+     "You may be aware of the recent media and public interest in standards of infection control in dental practice. As regulators of the profession, we are concerned that there has been doubt among registered dental practitioners about these essential standards.",
+     "Registered dental practitioners must comply with the National Board’s Guidelines on infection control. The guidelines list the reference material that you must have access to and comply with, including the National Health and Medical Research Council’s (NHMRC) Guidelines for the prevention and control of infection in healthcare.",
+     "We believe that most dental practitioners consistently comply with these guidelines and implement appropriate infection control protocols. However, the consequences for non-compliance with appropriate infection control measures will be significant for you and also for your patients and the community."
+    ],
+    "key": "A",
+    "n": 5
+   },
+   {
+    "q": "The results of the study described in the memo may explain why",
+    "opts": [
+     "superior communication skills may protect women from dementia.",
+     "female dementia sufferers have better verbal skills.",
+     "mild dementia in women can remain undiagnosed."
+    ],
+    "title": "Memo to staff: Women and Dementia",
+    "paras": [
+     "Please read this extract from a recent research paper Women’s superior verbal skills could work against them when it comes to recognizing Alzheimer’s disease. A new study looked at more than 1300 men and women divided into three groups: one group comprised patients with amnestic mild cognitive impairment; the second group included patients with Alzheimer’s dementia; and the final group included healthy controls. The researchers measured glucose metabolic rates with PET scans. Participants were then given immediate and delayed verbal recall tests.",
+     "Women with either no, mild or moderate problems performed better than men on the verbal memory tests. There was no difference in those with advanced Alzheimer’s.",
+     "Because verbal memory scores are used for diagnosing Alzheimer’s, some women may be further along in their disease before they are diagnosed. This suggests the need to have an increased index of suspicion when evaluating women with memory problems."
+    ],
+    "key": "C",
+    "n": 6
+   }
+  ],
+  "texts": [],
+  "C": []
  }
 }

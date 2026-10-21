@@ -1,0 +1,11 @@
+{
+ "B": [
+  [["potency", "（薬の）力価・効力"], ["purpose-built", "専用に作られた"], ["breach", "逸脱・違反"], ["discard", "廃棄する"], ["isolate", "隔離する・分けておく"], ["privately purchased", "自費で購入した"]],
+  [["depart", "出発する"], ["commence", "開始する"], ["log", "記録する"], ["breakdown", "崩壊・途絶"], ["documented", "記録された"], ["restocking", "補充"], ["biohazardous waste", "感染性廃棄物"]],
+  [["dispose of", "廃棄する・処分する"], ["contaminated", "汚染された"], ["potentially hazardous", "潜在的に危険な"], ["infectious", "感染性の"], ["protocols", "手順書・規定"], ["time-consuming", "手間のかかる"], ["discarded", "捨てられる"]],
+  [["object to", "～に反対する"], ["disclosure", "開示"], ["continuity", "継続性"], ["implications", "影響・波及"], ["in confidence", "秘密として"], ["warrant", "正当化する・理由になる"], ["breach of confidence", "守秘義務違反"]],
+  [["regulators", "規制当局"], ["comply with", "～を遵守する"], ["consistently", "一貫して・常に"], ["implement", "実施する"], ["non-compliance", "不遵守"], ["obligations", "義務"]],
+  [["superior", "優れた"], ["amnestic", "健忘型の"], ["cognitive impairment", "認知障害"], ["metabolic rates", "代謝率"], ["recall", "想起・記憶の呼び出し"], ["index of suspicion", "疑いの度合い"], ["undiagnosed", "診断されていない"]]
+ ],
+ "C": []
+}

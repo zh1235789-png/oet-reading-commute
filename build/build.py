@@ -8,6 +8,7 @@ PAST = {  # R{n}=Set{n} の過去誤答（Obsidian R1〜R5ノートより）: �
  '03': {'C13':'A','C14':'A','C18':'B'},
  '04': {'B1':'B','B2':'B','C11':'B','C12':'B','C14':'C'},
  '05': {'C7':'C','C11':'C','C16':'B','C21':'A'},
+ 'O1': {'B4':'C'},  # Official01（2026-10-21 Part B 採点）
 }
 sets = []
 for sid in sorted(base):

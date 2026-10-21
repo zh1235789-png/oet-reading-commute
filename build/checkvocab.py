@@ -19,7 +19,7 @@ for sid in sys.argv[1:]:
     f = f'ann/vocab/{sid}.json'
     if not os.path.exists(f): print(sid, 'MISSING'); continue
     v = json.load(open(f)); s = base[sid]; an = json.load(open(f'ann/{sid}.json'))
-    assert len(v['B'])==6 and len(v['C'])==16, (sid, len(v['B']), len(v['C']))
+    assert len(v['B'])==6 and len(v['C']) in (0,16)  # Official は B だけのことがある, (sid, len(v['B']), len(v['C']))
     for i,b in enumerate(s['B']):
         txt = norm(' '.join(b['paras']) + ' ' + b['title'] + ' ' + b['q'] + ' ' + ' '.join(b['opts']))
         for w,ja in v['B'][i]:

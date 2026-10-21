@@ -298,13 +298,13 @@ function renderToday(){
       <div class="stat"><b>${dueB + dueC}</b><span>今日の復習</span></div>
     </div></div>
     <div class="card today">
-      <div class="meta"><span class="pill b">Part B</span>${lbl(nb)}<span class="tiny">Set${nb.set} · 問${nb.n}</span></div>
+      <div class="meta"><span class="pill b">Part B</span>${lbl(nb)}<span class="tiny">${setLabel(nb.set)} · 問${nb.n}</span></div>
       <h2>${esc(nb.title)}</h2>
       <div class="muted">短文1本＋3択 → 和訳・選択肢ごとの正誤・解説・ポイント</div>
       <button class="bigbtn b" data-go="${nb.id}">B を1問解く</button>
     </div>
     <div class="card today">
-      <div class="meta"><span class="pill c">Part C</span>${lbl(nc)}<span class="tiny">Set${nc.set} · 問${nc.n}</span></div>
+      <div class="meta"><span class="pill c">Part C</span>${lbl(nc)}<span class="tiny">${setLabel(nc.set)} · 問${nc.n}</span></div>
       <h2>${esc(nc.text.title)}</h2>
       <div class="muted">該当段落1つ＋4択 → 根拠文ハイライト</div>
       <button class="bigbtn c" data-go="${nc.id}">C を1問解く</button>
@@ -315,8 +315,12 @@ function renderToday(){
 }
 function openItem(id, from){ VIEW = {id, from}; render(); window.scrollTo(0,0); }
 
+// SOLO Practice は Set01〜10、公式模試は O1＝Official01 のように持つ
+function setLabel(id){ return /^O\d+$/.test(id) ? 'Official' + id.slice(1).padStart(2, '0') : 'Set' + id; }
+
 function renderList(part){
-  $('#htitle').textContent = part === 'B' ? 'Part B（6問×10セット）' : 'Part C（16問×10セット）';
+  const nSets = SETS.filter(s => s[part].length).length;
+  $('#htitle').textContent = part === 'B' ? `Part B（6問×${nSets}セット）` : `Part C（16問×${nSets}セット）`;
   const f = FILTER[part];
   const chips = [['all','すべて'],['new','未回答'],['weak','苦手'],['due','復習'],['past','過去の誤答']];
   const pass = it => f==='all' || (f==='new' && !rec(it.id)) || (f==='weak' && isWeak(it)) || (f==='due' && status(it)==='due') || (f==='past' && it.past);
@@ -327,7 +331,7 @@ function renderList(part){
     if (!its.length) return; any = true;
     const all = ITEMS.filter(i => i.part===part && i.set===s.id);
     const okN = all.filter(i => rec(i.id) && rec(i.id).lastOk).length;
-    html += `<div class="setblk"><h3><span>Set${s.id}${part==='C' ? ` · ${esc(s.texts[0].title)} / ${esc(s.texts[1].title)}` : ''}</span><span>${okN}/${all.length}</span></h3>`;
+    html += `<div class="setblk"><h3><span>${setLabel(s.id)}${part==='C' ? ` · ${esc(s.texts[0].title)} / ${esc(s.texts[1].title)}` : ''}</span><span>${okN}/${all.length}</span></h3>`;
     its.forEach(it => {
       const st = status(it), r = rec(it.id);
       const dot = !r ? '' : r.lastOk ? 'ok' : 'ng';
@@ -350,7 +354,7 @@ function highlight(text, ev){
 function renderItem(it){
   const r = rec(it.id);
   const isB = it.part === 'B';
-  $('#htitle').textContent = `Set${it.set} · Part ${it.part} 問${it.n}`;
+  $('#htitle').textContent = `${setLabel(it.set)} · Part ${it.part} 問${it.n}`;
   const meta = `<div class="meta"><span class="pill ${isB?'b':'c'}">Part ${it.part}</span>
       ${isB ? '' : `<span class="pill">Text${it.t+1}「${esc(it.text.title)}」第${it.p+1}段落</span>`}
       ${r ? `<span class="pill ${r.lastOk?'okp':'past'}">前回 ${r.lastOk?'正解':'不正解'}（${r.n}回目済）</span>` : ''}</div>`;
@@ -420,7 +424,8 @@ function renderLog(){
   const a = acc('B'), c = acc('C');
   const cells = part => SETS.map(s => {
     const its = ITEMS.filter(i => i.part===part && i.set===s.id);
-    return `<div class="tiny" style="margin:6px 0 3px">Set${s.id}</div><div class="grid" style="grid-template-columns:repeat(16,1fr)">` +
+    if (!its.length) return '';  // Official01 などは Part B だけのセットがある
+    return `<div class="tiny" style="margin:6px 0 3px">${setLabel(s.id)}</div><div class="grid" style="grid-template-columns:repeat(16,1fr)">` +
       its.map(i => { const r = rec(i.id); const cls = !r ? '' : r.lastOk ? (r.wrong ? 'fix' : 'ok') : 'ng'; return `<div class="cell ${cls}" title="${i.id}"></div>`; }).join('') + '</div>';
   }).join('');
   let heat = '';

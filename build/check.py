@@ -4,7 +4,7 @@ base = json.load(open('build/base.json'))
 for sid in sys.argv[1:]:
     a = json.load(open(f'build/ann/{sid}.json'))
     s = base[sid]
-    assert len(a['B'])==6 and len(a['C'])==16, (sid, len(a['B']), len(a['C']))
+    assert len(a['B'])==6 and len(a['C']) in (0,16), (sid, len(a['B']), len(a['C']))
     for i,b in enumerate(a['B']):
         assert len(b['o'])==3, (sid,'B',i)
         k = 'ABC'.index(s['B'][i]['key'])
