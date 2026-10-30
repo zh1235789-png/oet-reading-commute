@@ -1,0 +1,190 @@
+{
+ "B": [
+  {
+   "qja": "看護スタッフがドレッシングを外してよいのはどんな場合か？",
+   "ja": "【術後のドレッシング】ドレッシングは術後創傷管理の重要な要素である。手術中に貼られたドレッシングは無菌条件下で貼られたものであり、外科チームの指示どおり、なるべくそのままにしておくべきである。ただし、創を確認し、場合によっては新しいドレッシングを貼るために、最初のドレッシングを予定より早く外すことは許容される。そうした状況とは、ドレッシングが役目を果たしていないとき（剥がれかけている、過剰な滲出液がしみ出して創傷治癒に不適な環境になっている等）や、創合併症が疑われるときである。",
+   "o": [
+    [
+     "外科チームのメンバーが立ち会っている",
+     "❌ 外科チームは『そのままにせよ』と指示する側として出るだけ。立ち会いの条件は書かれていない。"
+    ],
+    [
+     "創部からの漏れがひどい",
+     "✅ excessive exudate soaking through the dressing（過剰な滲出液がしみ出す）の言い換え。severe leakage ≒ excessive exudate。"
+    ],
+    [
+     "創が治ったと考えている",
+     "❌ 外してよいのは『目的を果たしていない』か『合併症が疑われる』とき。治癒したと思ったら、は無い。"
+    ]
+   ],
+   "exp": "条件問題は i.e.（すなわち）の後の具体例が正解の根拠になりやすい。exudate（滲出液）を leakage と言い換えている。",
+   "pt": "→ 型：括弧や i.e. の中の具体例は、選択肢で別の言葉に言い換えられて正解になる。"
+  },
+  {
+   "qja": "手順書の説明では、RUM回収容器の置き場所は、理想的には何をするべきか？",
+   "ja": "【不要医薬品：薬局での回収手順】RUM（不要医薬品返却）プロジェクト承認容器が卸業者から参加薬局に届けられる。容器は調剤室の一角、または一般の人が入れない薬局内の部屋・区画に置く。見える位置に置いてもよいが、一般の人の手の届かない所にすること。そうすることで『不要な処方薬は薬局に返却できる』『返却された薬は再利用されない』というメッセージが強まる。針などの鋭利物や液状の細胞毒性製剤はこの容器に入れず、専用の容器に入れる。",
+   "o": [
+    [
+     "回収制度への参加を促す",
+     "✅ visible position … reinforce the message that unwanted prescription drugs can be returned＝返却できると知らせる＝参加を促す。"
+    ],
+    [
+     "リサイクルの価値を強調する",
+     "❌ 本文は the returned medicines will not be recycled（再利用されない）。recycle の語を逆向きに使った罠。"
+    ],
+    [
+     "一般の人が容器を利用しやすくする",
+     "❌ out of reach of the public／the public does not have access と逆。"
+    ]
+   ],
+   "exp": "『見える位置に置く』目的は as this will reinforce the message …。メッセージの中身（返却できる）＝参加の呼びかけ。",
+   "pt": "→ 型：本文の否定（will not be recycled）を肯定にした選択肢は定番の誤答。not を必ず拾う。"
+  },
+  {
+   "qja": "メモで触れられている報告書は何を示唆しているか？",
+   "ja": "【メモ：経口抗がん薬に関する報告書】看護単位管理者は、経口抗がん薬の投与システムと投薬エラーの報告体制を見直すよう指示される。薬剤師への全国調査に基づく最近の報告書で、深刻な懸念が示された。報告書の次の段落に注意すること：経口抗がん薬の用量の誤りは致命的な結果を招きうる。過去4年間で、経口抗がん薬に関連して3件の死亡と400件の患者安全上の問題があった。報告の半数は、経口抗がん治療の用量・頻度・量・期間の誤りに関するものだった。さらに懸念されるのは、患者側のエラーが過少報告されている可能性があることだ。これらの報告を踏まえ、経口療法を受ける患者の管理体制の改善が明らかに必要である。",
+   "o": [
+    [
+     "患者のエラーに関するデータは不完全かもしれない",
+     "✅ errors on the part of patients may be under-reported（患者側のエラーは過少報告の可能性）＝データが不完全。"
+    ],
+    [
+     "病院職員のエラーはしばしば報告されない",
+     "❌ 過少報告されているのは『患者側』のエラー。主語のすり替え。"
+    ],
+    [
+     "処方の誤りが患者にとって最大の脅威である",
+     "❌ 半数が用量等の誤りとあるが、『処方』の誤りとも『最大の脅威』とも書いていない。"
+    ]
+   ],
+   "exp": "under-reported をそのまま使った選択肢Bは、誰のエラーかを入れ替えている。正解Aは under-reported を incomplete data と言い換え。",
+   "pt": "→ 型：同じ語（unreported）を使う選択肢は『主語・対象』が本文と同じか確認する。"
+  },
+  {
+   "qja": "麻酔ワークステーションについて、研修マニュアルはどんな点を述べているか？",
+   "ja": "【麻酔ワークステーション】麻酔の安全性に関する研究で、人の注意だけでは患者の安全を確保するのに不十分であることが示され、監視機器の重要性が強調された。この知見は、機器設計基準の改善、患者モニタリングのガイドライン、麻酔中のカプノグラフィーとパルスオキシメトリー使用に対する医療過誤保険料の引き下げに反映されている。麻酔ワークステーションは人工呼吸器の技術と患者モニター・アラームを統合し、万一人工呼吸器が故障した場合に患者の傷害を防ぐ。さらに、機械換気中はリザーバーバッグが回路の一部なので、バッグが目に見えて動いていることが、人工呼吸器が作動している確認になる。",
+   "o": [
+    [
+     "機器の一部が故障しやすいことが示されている",
+     "❌ in the unlikely event of a ventilator failure＝故障は『めったに起きない』。逆。"
+    ],
+    [
+     "人工呼吸器が正常に動いていることを確かめる方法が複数ある",
+     "✅ モニター・アラームの統合に加え、Furthermore でリザーバーバッグの動きでも確認できる＝方法が複数。"
+    ],
+    [
+     "医療者による監視は患者の安全を保つ確実な方法である",
+     "❌ human vigilance alone is inadequate（人の注意だけでは不十分）と逆。"
+    ]
+   ],
+   "exp": "Furthermore（さらに）が『もう1つの確認方法』を足している合図。2つの段落を合わせて『複数の方法』になる。",
+   "pt": "→ 型：Furthermore / Additionally の後は『もう1つ』。『複数ある』型の選択肢はこの合図で確かめる。"
+  },
+  {
+   "qja": "ヘビ咬傷の場合、フライングドクターは何を把握しておくべきか？",
+   "ja": "【フライングドクター職員へのメモ：ヘビ咬傷の抗毒素】治療開始前に：・咬傷部位を洗わない。・可能なら『ヘビ毒検出キット』で咬傷部位のスワブ（全身性中毒では尿）を検査し、ヘビの種類を特定する。毒検出ができない、または陰性の場合は、中毒情報センターに助言を求める。・血液での毒検査は信頼できない。・中毒の程度を評価する。確定したヘビ咬傷がすべて全身性中毒になるわけではなく、リスクはヘビの種によって異なる。・腎・肝・心・呼吸機能障害がある人、抗凝固薬・抗血小板薬を飲んでいる人は、重篤な転帰のリスクが高い可能性がある。小児も、体重が小さく咬まれた直後に動き回りやすいため、重症中毒のリスクが特に高い。",
+   "o": [
+    [
+     "特定の抗毒素をどこで入手できるか",
+     "❌ 入手場所の話はない。中毒情報センターに聞くのはヘビの種類の判断について。"
+    ],
+    [
+     "傷を洗う適切な方法",
+     "❌ Do not wash the snakebite site（洗うな）と逆。"
+    ],
+    [
+     "合併症を起こしやすい患者",
+     "✅ 既往のある人・抗凝固薬服用者・小児は increased risk of serious outcome＝重症化しやすい患者。"
+    ]
+   ],
+   "exp": "箇条書きの最後の項目が正解。increased risk of serious outcome を most likely to suffer complications と言い換え。",
+   "pt": "→ 型：箇条書きの本文は、選択肢1つずつに『どの項目か』を当てる。洗う・洗わないのような逆転を見落とさない。"
+  },
+  {
+   "qja": "BMTECフォーラムの目的は何だったか？",
+   "ja": "【清掃監査】2013〜2014年に3回の環境清掃監査が行われた。各施設の主要な担当者に調査を行い、看護単位管理者・環境サービス管理者・臨床ガバナンス責任者の立場から環境清掃の理解度を評価した。各施設は清掃監査の報告書と調査から得られた教訓を受け取った。比較のため15部署のデータも各施設に提供された。監査から得られた知識と経験は、2014年8月のBMTECフォーラムで共有された。このフォーラムで環境サービス管理者・清掃員・看護師・臨床ガバナンス担当が基準の適用について話し合い、新しく改善された清掃方法を広めた。フォーラムの2日目は、参加グループによる内部の環境清掃監査を強化するため、監査員の研修と技法に焦点を当てた。",
+   "o": [
+    [
+     "清掃監査の新しい実施方法を提案すること",
+     "❌ new and improved は『清掃方法（cleaning practice）』の話で、監査方法ではない。"
+    ],
+    [
+     "清掃監査の結果から結論を導くこと",
+     "✅ knowledge and experiences from the audits were shared／discuss the application of the standards＝監査結果から学びを引き出す場。"
+    ],
+    [
+     "もっと多くのグループに清掃監査をしてもらうこと",
+     "❌ 2日目は『参加グループ』の内部監査の強化。『より多くのグループ』に広げる話ではない。"
+    ]
+   ],
+   "exp": "誤答はどちらも本文の語（new and improved／auditing by the participating groups）を少しずらしている。何の new か、誰の audit かを照合する。",
+   "pt": "→ 型：形容詞（new）がどの名詞にかかっているかを確認。cleaning practice と cleaning audits は別物。"
+  }
+ ],
+ "C": [
+  {
+   "ev": "no health conditions for which there was reliable evidence that homeopathy was effective",
+   "note": "NHMRC＝『信頼できる証拠のある病気はない』、英下院＝『もっともらしい作用機序の証拠がない』→どちらも有効性の説得力ある証拠がない（C）。Bのプラセボと同等は英国の報告だけ。『both』の問題は両方に共通する点を選ぶ。"
+  },
+  {
+   "ev": "how can we possibly have something that people think works",
+   "note": "how can we possibly have …?＝人々が効くと信じていることへの驚き（A）。voting with their wallets（お金を払って支持）にも触れている。Bの『科学者が説明できない苛立ち』は無い。"
+  },
+  {
+   "ev": "Writer Johanna Ashmore is a case in point.",
+   "note": "段落の主題文 Part of homeopathy’s appeal may lie in the nature of the … consultation（魅力は診察の在り方）→ Johanna は a case in point（その好例）＝患者にとっての主な魅力（B）。Dの『GPが見逃す』は Greg Cope の発言。"
+  },
+  {
+   "ev": "often because they want an alternative choice to medication",
+   "note": "often because they want an alternative choice to medication＝患者の治療の好み（B）。Aの referral は本文に無い（診断を受けてから来る、であって紹介状が要るとは言っていない）。Cの specialist は medical practitioner の言い過ぎ。"
+  },
+  {
+   "ev": "which affect not only you, but people around you",
+   "note": "most worrying is things like HIV which affect not only you, but people around you＝使用者以外も危険にさらす（C）。Aのホメオパシーワクチンは『特に懸念される一例（集団免疫）』で、most worrying の中心は『周りの人への影響』。"
+  },
+  {
+   "ev": "even though he's only there reluctantly, we get wonderful outcomes",
+   "note": "Dad … only there reluctantly（しぶしぶ来る）でも wonderful outcomes＝疑っている人でも良い結果（D）。Bの『信じる力』は逆（信じていない人でも効く、がCopeの主張）。"
+  },
+  {
+   "ev": "I don't care how it works, even if it's all in the mind",
+   "note": "even if it’s all in the mind＝『気のせい（心理的要因）でも構わない』＝受け入れている（A）。Bの『最初は迷った』は本文に無い。Cは逆（研究が支持していないと認めている）。"
+  },
+  {
+   "ev": "In my view this is not about broader credibility per se",
+   "note": "this は前文『有効性を証明されたいなら、それを示さなければならない』＝ホメオパシーが科学的承認を求める動機（D）。直前の Broom questions why homeopathy seeks scientific validation（なぜ求めるのか）とつながる。"
+  },
+  {
+   "ev": "her gaze never wavered as she mentally guided the robot arm",
+   "note": "stared fixedly／her gaze never wavered／Only when she finally managed to take a sip did her face relax＝強い集中（A）。Bは逆（実際に飲めた）。Dの『初の試み』は書いていない。"
+  },
+  {
+   "ev": "the challenge is to get the resulting signals flowing to the correct part of the brain",
+   "note": "daunting＝課題は『信号を脳の正しい部位に流すこと』＝センサーと脳の接続は正確でなければならない（D）。Bの『筋肉の受容体同士をつなぐ』は無い。Cの『再現できない』はセンサーが多くの感覚を集められると逆。"
+  },
+  {
+   "ev": "more than twice as often as would have been expected by chance",
+   "note": "more than twice as often as would have been expected by chance＝偶然の2倍以上＝統計的に成功の証拠（A）。Bの wide range は言い過ぎ（区別できたのは basic features）。Dのコンピュータは使ったが『特別開発のプログラム』とは言っていない。"
+  },
+  {
+   "ev": "they'll need to keep the devices working for many years if they are to minimise the number of surgeries required to replace them as they wear out",
+   "note": "装置が摩耗するたびに交換手術が必要＝手術回数が多くなりすぎる（B）。Cは逆（複雑な感覚には何百・何千もの神経線維を刺激する必要がある＝課題であって『単純な感覚しか作れない』とは言っていない）。"
+  },
+  {
+   "ev": "all neurons close to the electrode's tip are activated indiscriminately",
+   "note": "電極の先端近くのニューロンが無差別に活性化される／一本の指のつもりが手の他の部分も＝電極で狙った部位を正確に刺激するのは難しい（D）。Bの脳卒中患者は段落の入口で、研究の必要性は述べていない。"
+  },
+  {
+   "ev": "The use of such techniques in humans is still probably 10–20 years away, but it is a promising strategy.",
+   "note": "電気の代わりに光を使う＝特定のニューロン群を狙える（前段落の電極の欠点を解決）＋promising strategy＝電気刺激より可能性がある（C）。Bの『期待どおり』は書いていない（90%は結果の数字で、期待との比較はない）。Aは逆（人への応用は10〜20年先）。"
+  },
+  {
+   "ev": "Tingles, pokes and vibrations are still a far cry from the complicated sensations",
+   "note": "a far cry from＝ほど遠い→ピリピリ・振動はリンゴを握る複雑な感覚にはまだほど遠い＝達成すべきことがまだ多い（A）。Cの『期待を下げる』は次の Weber の発言（完璧でなくてよい）に引かれた誤答。"
+  },
+  {
+   "ev": "are often happy to regain enough hearing to hold a phone conversation",
+   "note": "電話ができる程度の聴力で満足する（音楽の細部は分からなくても）＝『少しでも感覚がある方がないよりよい』（B）。直前の patients don't need a perfect sense of touch を例で支えている。"
+  }
+ ]
+}

@@ -1,6 +1,6 @@
 // 語彙リストの健全性。
 // 本文に無い語を載せると「本文で確認できない語を覚える」ことになるので、
-// 全226問（SOLO Set01-10 の220問＋Official01 の Part B 6問）について「語数がある・重複が無い・その問題の英文に実在する」を固定する。
+// 全286問（SOLO Set01-10 の220問＋Official01-03 の66問）について「語数がある・重複が無い・その問題の英文に実在する」を固定する。
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { loadApp } from './harness.mjs';
@@ -30,8 +30,8 @@ for (const s of SETS) {
   for (const c of s.C) items.push({ id: `Set${s.id} C${c.n}`, voc: c.voc, text: norm([s.texts[c.t].paras[c.p], c.q, ...c.opts].join(' ')) });
 }
 
-test('全226問に語彙リストがある', () => {
-  assert.equal(items.length, 226);
+test('全286問に語彙リストがある', () => {
+  assert.equal(items.length, 286);
   const empty = items.filter((i) => !Array.isArray(i.voc) || i.voc.length === 0);
   assert.deepEqual(empty.map((i) => i.id), []);
 });

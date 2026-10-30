@@ -219,7 +219,7 @@ const esc = s => String(s).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':
 const L = 'ABCD';
 function today(d = new Date()){ const z = n => String(n).padStart(2,'0'); return `${d.getFullYear()}-${z(d.getMonth()+1)}-${z(d.getDate())}`; }
 function addDays(ds, n){ const d = new Date(ds + 'T00:00:00'); d.setDate(d.getDate() + n); return today(d); }
-function pastLabel(it, letter){ return it.past ? `R${+it.set}で誤答` + (letter ? `（${it.past}を選択）` : '') : ''; }
+function pastLabel(it, letter){ return it.past ? `${/^O\d+$/.test(it.set) ? setLabel(it.set) : 'R' + (+it.set)}で誤答` + (letter ? `（${it.past}を選択）` : '') : ''; }
 
 /* flatten items */
 const ITEMS = [];

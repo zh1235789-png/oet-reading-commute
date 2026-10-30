@@ -4,9 +4,18 @@
    "qja": "ワクチンが不適切に保管されていた場合、",
    "ja": "【マニュアル抜粋：効果的なコールドチェーン】コールドチェーンとは、ワクチンを製造場所から接種の場所まで +2°C〜+8°C の温度範囲で輸送・保管する仕組みである。コールドチェーンを維持することは、ワクチンの力価、ひいてはワクチンの有効性を保つために不可欠である。ワクチンの保管には専用のワクチン冷蔵庫（PBVR）が望ましい。家庭用冷蔵庫はワクチン保管に必要な特別な温度管理を想定して作られていない。最善の手順を守っていても、コールドチェーンの逸脱は時に起こる。+2°C未満または+8°Cを超える温度にさらされたワクチンは、さらなる助言を得ずに廃棄も使用もしてはならない。ワクチンを隔離し、国の予防接種プログラムのワクチンについては州・準州の公衆衛生当局に、自費購入のワクチンについては製造元に連絡して助言を求めること。",
    "o": [
-    ["そのことを報告すべきである", "✅ Isolate vaccines and contact the state or territory public health bodies … and the manufacturer … for advice＝当局・製造元に連絡する＝報告する、の言い換え。"],
-    ["職員は安全に廃棄すべきである", "❌ 本文は Do not discard … without obtaining further advice＝『助言なしに廃棄するな』。廃棄は逆の行動。"],
-    ["供給元に送り返すべきである", "❌ 製造元（manufacturer）には『連絡して助言を求める』だけ。送り返すとはどこにも書いていない。manufacturer＝supplier の連想につられる罠。"]
+    [
+     "そのことを報告すべきである",
+     "✅ Isolate vaccines and contact the state or territory public health bodies … and the manufacturer … for advice＝当局・製造元に連絡する＝報告する、の言い換え。"
+    ],
+    [
+     "職員は安全に廃棄すべきである",
+     "❌ 本文は Do not discard … without obtaining further advice＝『助言なしに廃棄するな』。廃棄は逆の行動。"
+    ],
+    [
+     "供給元に送り返すべきである",
+     "❌ 製造元（manufacturer）には『連絡して助言を求める』だけ。送り返すとはどこにも書いていない。manufacturer＝supplier の連想につられる罠。"
+    ]
    ],
    "exp": "正解の根拠は第3段落の命令文2つ（Do not discard or use … ／ Isolate … and contact …）。B・Cはどちらも本文の語（discard／manufacturer）を借りて、本文と違う行動を作った誤答。",
    "pt": "→ 型：手順・指示の文書では、命令文（Do not ～ / Isolate / contact）が答えになる。選択肢の行動が本文の命令と『同じ行動』かを照合し、語が似ているだけの選択肢は切る。"
@@ -15,9 +24,18 @@
    "qja": "抜粋によると、訪問看護に出る前に看護師がしなければならないのは",
    "ja": "【訪問看護のガイドライン】看護師は出発の準備ができたら、訪問看護を開始することを少なくとも2人の職員に伝えなければならず、そのうち1人が看護師の動きを記録する責任を負う。看護師の動きは複数の人が把握していなければならない。これを怠ると連絡体制が崩れ、看護師や診療所へのリスクが高まるおそれがある。診療所に戻ったら、看護師は直ちに職員に帰着を伝える。この時刻は訪問患者リストに記録され、事務職員がスキャンして保管する。その後、看護師は検体・コールドチェーンの要件・看護バッグの補充・感染性廃棄物の処理に対応する。",
    "o": [
-    ["診療所を出る時刻を記録する", "❌ 記録するのは『帰着の時刻』で、しかも記録するのは看護師ではない（This time will be documented … by administration staff の流れ）。出発時に動きを記録するのも別の職員（one staff member responsible for logging）。"],
-    ["必要な物品をバッグに補充する", "❌ restocking of the nurse kit は『戻ってから』の作業（On return … The nurse will then attend to …）。before/after の入れ替え。"],
-    ["自分の予定を他の人に伝える", "✅ he/she must advise a minimum of two staff members that he/she is commencing home visits＝少なくとも2人に訪問開始を伝える、の言い換え。advise ≒ communicate、intentions ≒ commencing home visits。"]
+    [
+     "診療所を出る時刻を記録する",
+     "❌ 記録するのは『帰着の時刻』で、しかも記録するのは看護師ではない（This time will be documented … by administration staff の流れ）。出発時に動きを記録するのも別の職員（one staff member responsible for logging）。"
+    ],
+    [
+     "必要な物品をバッグに補充する",
+     "❌ restocking of the nurse kit は『戻ってから』の作業（On return … The nurse will then attend to …）。before/after の入れ替え。"
+    ],
+    [
+     "自分の予定を他の人に伝える",
+     "✅ he/she must advise a minimum of two staff members that he/she is commencing home visits＝少なくとも2人に訪問開始を伝える、の言い換え。advise ≒ communicate、intentions ≒ commencing home visits。"
+    ]
    ],
    "exp": "設問の prior to（～の前に）が鍵。本文は『出発時』と『帰着後』の2段落に分かれていて、誤答AとBはどちらも『帰着後』の段落の内容を出発前に置き換えたもの。",
    "pt": "→ 型：設問に時点（prior to / after / on return）があれば、まず本文のどの段落がその時点かを決めてから選択肢を見る。時系列の入れ替えは Part B の定番の誤答。"
@@ -26,9 +44,18 @@
    "qja": "ガイドラインのこの部分で述べられているのは何か？",
    "ja": "【病院廃棄物の取り扱いガイドライン】すべての生物学的廃棄物は慎重に保管し、安全に廃棄しなければならない。輸血バッグ、汚れた包帯、使い捨ての注射針などの汚染物も潜在的に危険であり、それに応じて扱わなければならない。生物学的廃棄物や汚染物が適切に廃棄されないと、職員や地域の人々が感染性物質にさらされ、感染するおそれがある。病院には生物学的廃棄物と汚染物を扱うための手順書を備えることが不可欠であり、全職員がそれを熟知し、従わなければならない。感染性物質の廃棄は手間も費用もかかるため、紙・包装材・非滅菌物などの汚染されていない廃棄物を分別することが重要である。廃棄物が出る場所に別々の廃棄容器を用意し、捨てる時点で職員が分別できるようにする。",
    "o": [
-    ["手順の変更", "❌ 『新しく』『今後は』『変更』を示す語が本文に一つもない。"],
-    ["望ましい（最善の）実践手順", "✅ must be carefully stored／must be treated accordingly／It is essential … ／Make separate disposal containers available＝あるべき標準のやり方を一般論として述べている。"],
-    ["手順の例外", "❌ except / unless / in some cases のような例外の記述はない。"]
+    [
+     "手順の変更",
+     "❌ 『新しく』『今後は』『変更』を示す語が本文に一つもない。"
+    ],
+    [
+     "望ましい（最善の）実践手順",
+     "✅ must be carefully stored／must be treated accordingly／It is essential … ／Make separate disposal containers available＝あるべき標準のやり方を一般論として述べている。"
+    ],
+    [
+     "手順の例外",
+     "❌ except / unless / in some cases のような例外の記述はない。"
+    ]
    ],
    "exp": "文書全体の性格を問う問題。must / essential / it is important to と命令文が並ぶだけで、時期（変更）や条件（例外）の語がない＝標準のやり方の説明。",
    "pt": "→ 型：文書の性格を問われたら、『変更（new / now / from ～）』『例外（except / unless）』の合図語が本文にあるかを先に探す。なければ『標準・推奨のやり方』が答え。"
@@ -37,9 +64,18 @@
    "qja": "患者から打ち明けられた秘密の情報を、医療者が他人に伝えてよいのはどんなときか？",
    "ja": "【ガイドライン抜粋：患者の守秘義務】患者が、自分の治療に関わる他の医療者と情報を共有することに反対する場合は、開示することで治療の継続性と質がどう向上するかを説明すべきである。その判断が予定している治療に影響する場合は、患者にそのことを伝える必要がある。それでも患者が拒否するなら、安全上の理由で治療の選択肢を狭めることになっても、その判断を尊重しなければならない。患者の判断は診療記録に記載する。秘密として受け取った情報を同意なしに開示することが公益にかなう場合もある。たとえば重大な犯罪についての情報である。このように守秘義務を破ってよいのは例外的な状況に限られ、それも慎重に検討したうえでなければならない。つまり、自分の行為を正当化でき、もし開示していなかったら患者や他の関係者にどんな害が及んだかを示せる、ということである。窃盗・詐欺・器物損壊は、一般に守秘義務を破る理由にはならない。",
    "o": [
-    ["開示しないことが関係者に悪影響を与えうる場合", "✅ point out the possible harm to the patient or other interested parties if you hadn't disclosed the information の言い換え。if you hadn't disclosed＝non-disclosure、harm＝adversely affect、the patient or other interested parties＝those involved。"],
-    ["そうしなければ患者の治療が損なわれるかもしれない場合", "❌ 第1段落は逆で、治療に影響が出ても患者が拒めば you must respect their decision（判断を尊重する）。治療への影響は開示の理由にならない。"],
-    ["そうしなければ医療者が法律違反になる場合", "❌ 本文の serious crime（重大な犯罪）から『法律』を連想させる罠。本文は『犯罪についての情報なら開示が公益になりうる』と言うだけで、黙っていると医療者が違法になるとは書いていない。直後の Theft, fraud … would generally not warrant a breach of confidence もこの読みを否定している。"]
+    [
+     "開示しないことが関係者に悪影響を与えうる場合",
+     "✅ point out the possible harm to the patient or other interested parties if you hadn't disclosed the information の言い換え。if you hadn't disclosed＝non-disclosure、harm＝adversely affect、the patient or other interested parties＝those involved。"
+    ],
+    [
+     "そうしなければ患者の治療が損なわれるかもしれない場合",
+     "❌ 第1段落は逆で、治療に影響が出ても患者が拒めば you must respect their decision（判断を尊重する）。治療への影響は開示の理由にならない。"
+    ],
+    [
+     "そうしなければ医療者が法律違反になる場合",
+     "❌ 本文の serious crime（重大な犯罪）から『法律』を連想させる罠。本文は『犯罪についての情報なら開示が公益になりうる』と言うだけで、黙っていると医療者が違法になるとは書いていない。直後の Theft, fraud … would generally not warrant a breach of confidence もこの読みを否定している。"
+    ]
    ],
    "exp": "条件を問う設問（When is it acceptable…?）。答えは第2段落の『例外的な状況に限る』の直後、This means … if you hadn't disclosed the information の文。Cは本文の語（crime）と連想でつながっているだけ。",
    "pt": "→ 型：選択肢の語が本文の語と『連想』でつながっているだけなら切る（crime → law）。条件を問う設問は、本文の if / only / in exceptional circumstances の直後に答えがある。"
@@ -48,9 +84,18 @@
    "qja": "感染管理の義務について開業歯科医に送られたこのメールの目的は",
    "ja": "【オーストラリア歯科委員会からのメール】開業歯科医各位。歯科診療における感染管理の基準について、最近メディアや世間の関心が高まっていることはご存じかもしれません。専門職の規制当局として、私たちは、登録歯科医の間でこれらの重要な基準について疑念（迷い）が生じていることを懸念しています。登録歯科医は、国家委員会の感染管理ガイドラインを遵守しなければなりません。ガイドラインには、参照し遵守しなければならない資料が列挙されており、その中には国立保健医療研究評議会（NHMRC）の『医療における感染予防・管理ガイドライン』も含まれます。私たちは、ほとんどの歯科医が常にこれらのガイドラインを守り、適切な感染管理手順を実施していると信じています。しかし、適切な感染管理措置を守らなかった場合の影響は、皆さんにとっても、患者や地域社会にとっても重大なものとなります。",
    "o": [
-    ["義務を改めて思い出させる", "✅ must comply with the National Board's Guidelines … と既存の義務を確認し、However, the consequences for non-compliance … will be significant で締めている＝リマインダー。"],
-    ["彼らが寄せた個別の質問に答える", "❌ 宛先は Dear Practitioner（全員）で、特定の質問への言及はない。きっかけは『メディアの関心』と『疑念』。"],
-    ["彼らに関わる規則の変更を告知する", "❌ new / change / from（日付）など変更の語がない。ガイドラインは既存のもの（must comply with … guidelines）。"]
+    [
+     "義務を改めて思い出させる",
+     "✅ must comply with the National Board's Guidelines … と既存の義務を確認し、However, the consequences for non-compliance … will be significant で締めている＝リマインダー。"
+    ],
+    [
+     "彼らが寄せた個別の質問に答える",
+     "❌ 宛先は Dear Practitioner（全員）で、特定の質問への言及はない。きっかけは『メディアの関心』と『疑念』。"
+    ],
+    [
+     "彼らに関わる規則の変更を告知する",
+     "❌ new / change / from（日付）など変更の語がない。ガイドラインは既存のもの（must comply with … guidelines）。"
+    ]
    ],
    "exp": "purpose 問題は最後の文（着地点）と However の後ろで決める。『ほとんどは守っていると信じている。しかし守らなければ重大な結果になる』＝既存の義務の念押し。",
    "pt": "→ 型：purpose は最終文と However / but の後ろで決める。『変更の告知』を選ぶには本文に new / change / from 〇月 の合図が必要。"
@@ -59,13 +104,87 @@
    "qja": "このメモで紹介されている研究の結果は、次のどれの理由を説明しうるか？",
    "ja": "【職員向けメモ：女性と認知症】最近の研究論文の抜粋を読んでください。女性の優れた言語能力が、アルツハイマー病を見つけるうえでは不利に働くかもしれない。新しい研究では1300人以上の男女を3群に分けて調べた。1群目は健忘型軽度認知障害の患者、2群目はアルツハイマー型認知症の患者、3群目は健康な対照群である。研究者はPETでブドウ糖の代謝率を測定し、その後、参加者に即時・遅延の言語記憶テストを行った。問題なし・軽度・中等度のいずれの段階でも、女性は言語記憶テストで男性より成績が良かった。進行したアルツハイマー病の人では差がなかった。言語記憶の得点はアルツハイマー病の診断に使われるため、一部の女性は診断される時点で病気がすでに進んでいる可能性がある。このことは、記憶の問題を抱える女性を評価する際には、疑いの度合いを高める必要があることを示している。",
    "o": [
-    ["優れたコミュニケーション能力が女性を認知症から守るかもしれない", "❌ 本文は『言語能力が高いと診断が遅れる』であって、『発症を防ぐ』という因果は書いていない。"],
-    ["認知症の女性は言語能力が高い", "❌ 言い過ぎ。進行例では There was no difference in those with advanced Alzheimer's＝差がない。mild / moderate までの話。"],
-    ["女性の軽度の認知症は診断されないままになりうる", "✅ some women may be further along in their disease before they are diagnosed（診断される前にすでに進んでいる）＝軽い段階では見逃される、の言い換え。"]
+    [
+     "優れたコミュニケーション能力が女性を認知症から守るかもしれない",
+     "❌ 本文は『言語能力が高いと診断が遅れる』であって、『発症を防ぐ』という因果は書いていない。"
+    ],
+    [
+     "認知症の女性は言語能力が高い",
+     "❌ 言い過ぎ。進行例では There was no difference in those with advanced Alzheimer's＝差がない。mild / moderate までの話。"
+    ],
+    [
+     "女性の軽度の認知症は診断されないままになりうる",
+     "✅ some women may be further along in their disease before they are diagnosed（診断される前にすでに進んでいる）＝軽い段階では見逃される、の言い換え。"
+    ]
    ],
    "exp": "may explain why（～の理由を説明しうる）は、研究結果から導かれる結論文を探す問題。根拠は Because verbal memory scores are used for diagnosing … の1文。Bは限定（mild/moderate）を外した言い過ぎ。",
    "pt": "→ 型：研究の結論問題は Because … / This suggests … の文が答え。選択肢の主語の範囲（全員か、一部か、どの段階か）を本文の限定語（some / mild / advanced）と照合する。"
   }
  ],
- "C": []
+ "C": [
+  {
+   "ev": "Because of the widespread use of asbestos, its fibres are ubiquitous in the environment.",
+   "note": "Because of the widespread use＝『非常に広く使われている』（C）が害の広がりの原因。Dは1975年以降の建材には含まれないはずと本文が否定。Bは『他の化学物質とほぼ反応しない』と逆。"
+  },
+  {
+   "ev": "its fibres are ubiquitous in the environment",
+   "note": "ubiquitous＝どこにでもある（A）。直前の widespread use から『あちこちにある』とつながる。Bの『長持ちする』は前文の『蒸発・溶解しない』に引かれた誤答。"
+  },
+  {
+   "ev": "The patient then began legal proceedings to claim compensation as he had worked in a dockyard 25 years previously",
+   "note": "咳をACE阻害薬の副作用と思い込まれ、診断が遅れた。原因は25年前の曝露（C）。段落冒頭 20 to 40 years after exposure がこの症例の前置き。Aの喫煙は鑑別の材料で主旨ではない。"
+  },
+  {
+   "ev": "there is debate over what constitutes a safe level of exposure",
+   "note": "debate over what constitutes a safe level of exposure＝『どの程度の接触から有害か』（D）。threshold（閾値あり）派 vs no safe level 派の対立。A〜Cの繊維の種類別リスクは事実として述べられていて、論争ではない。"
+  },
+  {
+   "ev": "cannot be completely broken down by scavenger cells (macrophages) and become lodged in the lung tissue",
+   "note": "become lodged in the lung tissue＝肺組織にとどまる（B）。Aの肺胞まで届くのは『瘢痕』の広がり。Cの炎症物質を出すのは『反応する細胞』で繊維自体ではない。Dは逆（マクロファージが繊維を壊せない）。"
+  },
+  {
+   "ev": "so prevention and rapid treatment is vital",
+   "note": "are at a higher risk of serious infections … so prevention and rapid treatment is vital＋インフルエンザ・肺炎球菌ワクチンが routine care＝感染対策（B）。Cの early intervention は rapid treatment に引かれた誤答（対象は感染症で、病気全体の早期介入ではない）。"
+  },
+  {
+   "ev": "little is known about the long term effects of these products because of the long delay in the development of disease",
+   "note": "長期影響は分かっていない＋In spite of their potential health risks＝将来の健康被害の恐れ（B）。Dの『以前より安全』は業界の主張（proclaims the ‘safety’）を引用しているだけで筆者の見解ではない。Aは60か国で使用・商業利用が続くと逆。"
+  },
+  {
+   "ev": "Asbestosis remains a significant clinical problem even after marked reductions in on the-job exposure to asbestos.",
+   "note": "this is due to … の this は直前文全体『職場曝露が大きく減っても石綿肺が重要な臨床問題であり続けること』（C）。Aの『曝露から発症までの間隔』は this の『理由』のほう（the long period of time）で、指す内容ではない。"
+  },
+  {
+   "ev": "The concept makes sense in theory",
+   "note": "makes sense in theory＋failure to comply is one of the most common reasons for readmission＝導入の理由には理解を示す（B）。Cの懐疑は第5段落で出てくるもので、第1段落の態度ではない。段落指定のある問題は、その段落の中だけで判断する。"
+  },
+  {
+   "ev": "But the hustle and bustle of daily life and employment often get in the way of taking medications",
+   "note": "hustle and bustle of daily life and employment … even for such well-intentioned patients＝『遵守するつもりのある忙しい勤労者』（C）。Aの高齢者は保険で看護師が毎日訪問する例で、『ノンコンプライアンスの分類』ではない（occasional でもない）。"
+  },
+  {
+   "ev": "in essence, they view an antihypertensive as an antibiotic that can be used as short-term treatment for a short-term problem",
+   "note": "降圧薬を抗菌薬のような『短期の問題への短期治療』と見ている＝継続治療が要る病気だと気づいていない（B）。Cは in layman’s terms に引かれた誤答（本文は『平易に説明されていない』で、説明されても分からないではない）。"
+  },
+  {
+   "ev": "But a simple conversation with the patient at this juncture can easily change their perspective.",
+   "note": "副作用の一覧を見て不安な患者に、リスクとベネフィットの話をすれば見方が変わる＝起こる可能性を伝えるべき（D）。Aの『より良い計画』は本文に無い（モニターして対処する、とは言うが計画の改善ではない）。Bの online は話のきっかけにすぎない。"
+  },
+  {
+   "ev": "patients will have to be taking these medications for decades",
+   "note": "the long term benefits … are likely to be minimal／one isolated study is not … real-life: patients will have to be taking these medications for decades＝長期的に成り立つか（A）。Bの金額は『最初は十分な額かも』と触れるだけで懸念の中心ではない。"
+  },
+  {
+   "ev": "What's worse, it seems to be saying to society",
+   "note": "it seems to be saying to society … 遵守している患者にはお金を払わない＝『暗黙の罰』という誤ったメッセージ（C）。Dの『細部で破綻する』は complications abound に引かれた誤答で、段落の主張は『社会へのメッセージ』。"
+  },
+  {
+   "ev": "'Be compassionate,' he urges doctors.",
+   "note": "He's surely right on that score の that score＝直前の Steiner の助言『思いやりを持て／患者にとって複雑な綱渡りだと理解せよ』＝患者への推奨される対応（D）。Bの多職種協力（team sport）は後ろに出てくる話で、that が指すのは前。"
+  },
+  {
+   "ev": "Perhaps there was some wisdom in her 'non-compliance.'",
+   "note": "施設で要介護になるのを避けられた／Perhaps there was some wisdom in her non-compliance＝結果的に得をしたかもしれない（A）。Dの『指示に従うべきだった』は途中の Had she taken … she might have survived に引かれた誤答。筆者は But then maybe … と打ち消している。"
+  }
+ ]
 }

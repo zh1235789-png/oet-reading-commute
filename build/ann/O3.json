@@ -1,0 +1,190 @@
+{
+ "B": [
+  {
+   "qja": "この方針文書から分かることは何か？",
+   "ja": "【投与終了日の処方】処方者は、処方する各抗菌薬について、電子処方システムEPMAまたは薬剤チャートに見直し日または終了日を記入すべきである。EPMAでは経口抗菌薬の終了日は入力必須になっている。静注抗菌薬には終了日の入力必須設定はなく、静注の期間が分かっていれば終了日を記入できる。分からない場合は、追加情報欄に見直し（例：『48時間後に見直し』）を記入する。終了日や指示された期間を超えて治療を続ける必要があると処方者が判断した場合、チャートを修正するのは処方者の責任である。集中治療部門では、チャートに見直し日・終了日を日常的に記入するのは必ずしも適切ではないと合意されている。",
+   "o": [
+    [
+     "終了日がすべての状況で当てはまるわけではない",
+     "✅ 最終文 In critical care … not always appropriate（集中治療では必ずしも適切でない）の言い換え。"
+    ],
+    [
+     "EPMAを使う人は終了日の要請を無視してよい",
+     "❌ EPMAでは経口薬の終了日が forced entry（入力必須）。無視できない。"
+    ],
+    [
+     "処方者は処方前に終了日を把握していなければならない",
+     "❌ 分からなければ review（見直し日）を書けばよい、とある。must know は言い過ぎ。"
+    ]
+   ],
+   "exp": "Part B は最後の1文に『例外』が置かれることが多い。not always appropriate を not relevant in all circumstances と言い換え。",
+   "pt": "→ 型：must / all / any など強い語の選択肢は、本文の『If not known …』のような逃げ道で否定される。"
+  },
+  {
+   "qja": "ガイドラインによると、放射線治療用の個別器具はどうだと分かるか？",
+   "ja": "【ガイドライン：放射線治療シミュレーション（計画）予約】最初の予約はシミュレーション予約とも呼ばれる。この予約で患者の病歴と治療の選択肢について話し合い、放射線治療計画に合意する。最初の手順は通常、治療部位のCTスキャンである。患者は放射線腫瘍医、その研修医、放射線治療技師に会う。治療に最適で最も楽な体位が決められ、治療期間中は毎日その体位を再現する。治療する部位によっては、フェイスマスクなどの個別器具を使って患者の体位を固定することがある。この器具は治療中に患者を楽に静止させ、治療をより正確にする。",
+   "o": [
+    [
+     "すべての患者に勧められる",
+     "❌ Depending on the area of the body to be treated … may be used＝部位によって使う。全員ではない。"
+    ],
+    [
+     "照射中の精度を高める",
+     "✅ makes the treatment more accurate の言い換え。accurate ≒ precision。"
+    ],
+    [
+     "初回の診察で試す必要がある",
+     "❌ 器具を試す時期の記述はない。初回予約で決めるのは『体位』。"
+    ]
+   ],
+   "exp": "正解は段落最後の文。personalized equipment が出てくるのは最後の2文だけなので、そこを精読すれば足りる。",
+   "pt": "→ 型：設問のキーワード（personalized equipment）が本文のどこに出るか先に探し、その前後だけを読む。"
+  },
+  {
+   "qja": "この説明書の目的は、何のやり方を説明することか？",
+   "ja": "【CT200CV 動物用心電計 取扱説明書：動物への接続】良好な電極接続は、質の高い心電図を記録するうえで最も重要な要素である。いくつかの基本手順に従えば、安定した、ノイズの少ない記録が得られる。・動物の各前肢の接触部位の毛を剃る。・電極部位をアルコール綿か消毒剤で拭く。・心電図リードにクリップを付ける。・肢ストラップまたはアダプタークリップの金属電極に心電図用ジェルを少量塗る。・動物の皮膚をつまみ、検査する動物の剃った部分にクリップを付ける。動物は静止させておくこと。・液晶表示で心拍が安定して表示されるか確認する。・心拍が表示されなければ、1本以上のリードに接触不良がある。・リードを再確認し、動物の剃った皮膚にクリップを付け直す。",
+   "o": [
+    [
+     "心電図の波形を監視する",
+     "❌ LCDの確認は接続できたかのチェック。波形の監視方法の説明ではない。"
+    ],
+    [
+     "電極を正しく装着する",
+     "✅ 見出し Animal connections と冒頭 Good electrode connection is the most important factor＋手順はすべて電極の付け方。"
+    ],
+    [
+     "心電図検査中に動物を扱う",
+     "❌ The animal must be kept still は1行だけ。説明書全体の目的ではない。"
+    ]
+   ],
+   "exp": "目的（purpose）問題は見出しと冒頭文で決まる。手順の1行に引かれた選択肢（動物を静止させる、表示を見る）は部分にすぎない。",
+   "pt": "→ 型：purpose 問題は『全体を包む』選択肢を選ぶ。本文の1行だけに当てはまる選択肢は捨てる。"
+  },
+  {
+   "qja": "『せっかちな患者』と呼ばれる集団は、どんな場合に処方薬の服用を続けやすいか？",
+   "ja": "【服薬アドヒアランスと『せっかちな患者』】最近の論文が『未来より現在を好む』人々の行動を取り上げた。こうしたいわゆる『せっかちな患者』は、長期間の使用が必要な薬を守りにくいという。論文は『せっかち遺伝子型』の存在を提唱し、こうした患者の将来観を評価したうえで、遠い将来の合併症を強調するより、服薬遵守の『すぐに得られる利点』を強調する方がアドヒアランス率が上がる可能性があるとする。著者らは、『せっかちな』人の性格を変えようとするより、特に目先の利益に関わる患者個人の優先事項を確かめるのが賢明だろうと述べる。たとえば『せっかちな』糖尿病患者には、網膜症の回避より視力の改善を強調する方が服薬遵守率が高まるかもしれない。さらに、血糖値で視力が変動するたびに眼鏡を作り直す費用と結びつけると、患者に目先の金銭的動機を与えられることもある。",
+   "o": [
+    [
+     "治療をより短い期間で終えられる",
+     "❌ 治療期間を短くする話はない。use over an extended period は『守りにくい理由』として出るだけ。"
+    ],
+    [
+     "治療を金銭的な利点と結びつけられる",
+     "❌ 金銭の話は Additionally … may sometimes provide と補足の一例。設問の『続けやすい条件』の中心ではない。"
+    ],
+    [
+     "短期的な利点を説明される",
+     "✅ stressing the immediate advantages of adherence … may improve adherence rates の言い換え。immediate ≒ short-term。"
+    ]
+   ],
+   "exp": "主張の中心は『遠い合併症より目先の利点を強調する』。B（金銭）は本文にあるが may sometimes の補足で、Additionally で足された周辺情報。",
+   "pt": "→ 型：本文にある情報でも、may sometimes など弱い言い方の補足は正解になりにくい。中心の主張（proposes that …）を優先する。"
+  },
+  {
+   "qja": "このメモは看護スタッフに何を避けるよう念を押しているか？",
+   "ja": "【経鼻胃管の位置確認】胃管が胃内にあることを、次のいずれかで必ず確認すること：・吸引液のpH測定：pH 4未満なら胃内留置を示すが、胃酸分泌抑制薬を使っている患者ではpH 4〜6に上がることがある。青色リトマス紙は感度が不十分で、吸引液の酸性度を十分に区別できない。・X線：撮影した時点の位置しか確認できない。患者が病棟に戻るまでに胃管が動いているかもしれない。吸引液検査で陽性が得られない場合（pHが5.5を超える場合）、または意識のない患者・人工呼吸器装着中の患者では、経鼻胃管の初回位置を確認するためにX線を撮らなければならない。",
+   "o": [
+    [
+     "pHが5.5を超えない限り患者のX線を撮らないこと",
+     "❌ pH 5.5超はX線を『撮るべき』条件の一つ。意識のない患者などは pH に関係なく撮る。"
+    ],
+    [
+     "特定のpH測定方法を使うこと",
+     "✅ Blue litmus paper is insufficiently sensitive（青色リトマス紙は感度不足）＝この方法は避ける。"
+    ],
+    [
+     "胃酸抑制薬を飲む患者でpH検査に頼ること",
+     "❌ pH が4〜6に上がることがある、と注意しているだけ。『頼るな』とは書いていない。"
+    ]
+   ],
+   "exp": "『避けるべきこと』は本文では insufficiently sensitive という否定的評価で書かれている。Cは本文の情報（acid-inhibiting）を『禁止』に強めた選択肢。",
+   "pt": "→ 型：avoid 問題は、本文の否定的評価（insufficient / not reliable）が付いたものを探す。注意書きを禁止に強めた選択肢に注意。"
+  },
+  {
+   "qja": "この抜粋から分かることは何か？",
+   "ja": "【ガイドライン抜粋：オキシトシン】1. オキシトシンの用法・用量非経口薬は、溶液と容器が許す限り、投与前に異物や変色がないか目視で確認すること。オキシトシンの用量は子宮の反応によって決まる。以下の用量情報は、一般に用いられているさまざまなレジメンと適応に基づく。1.1 分娩誘発・促進分娩の誘発・促進に認められる投与法は静脈内点滴のみである。点滴速度の正確な管理が不可欠である。分娩誘発・促進のためにオキシトシンを安全に投与するには、輸液ポンプなどの機器と、子宮収縮の強さ・胎児心拍の頻回な監視が必要である。子宮収縮が強くなりすぎた場合は点滴を急に止めることができ、子宮筋へのオキシトシン刺激はすぐに弱まる。",
+   "o": [
+    [
+     "オキシトシンの投与量は患者の反応によって決まる",
+     "✅ Dosage of Oxytocin is determined by the uterine response の言い換え。"
+    ],
+    [
+     "オキシトシンを投与するとすぐに陣痛が始まる",
+     "❌ 投与後すぐに分娩になるとは書いていない。"
+    ],
+    [
+     "スタッフは使用前にオキシトシンのポンプを点検すべきだ",
+     "❌ 投与前に目視確認するのは『薬液（parenteral drug products）』で、ポンプではない。"
+    ]
+   ],
+   "exp": "Cは inspected visually … prior to administration の対象を薬からポンプにすり替えた誤答。何を inspect するのかを照合する。",
+   "pt": "→ 型：動詞（inspect）が本文と同じでも、目的語が違えば誤答。動詞の目的語まで一致を確認する。"
+  }
+ ],
+ "C": [
+  {
+   "ev": "For some people, the process is too protracted, but there may be a short cut.",
+   "note": "伝統的な方法は expose them to the fear numerous times（何度も恐怖にさらす）→ too protracted（長すぎる）＝繰り返し時間をかけて向き合う必要（D）。Aの『治療の長期的な心理的影響』は無い。"
+  },
+  {
+   "ev": "leads the feelings to resurge whenever the relevant cue is seen again",
+   "note": "dark side＝記憶の能力の悪い面：嫌な体験が、手がかりを見るたびに感情をよみがえらせる＝不快な記憶が特定のきっかけで呼び起こされる（D）。Aの『楽しい記憶は不正確』は前文 more idealized than exact に引かれた誤答。"
+  },
+  {
+   "ev": "the brain automatically creates a new memory",
+   "note": "the brain automatically creates a new memory＝脳が本来持つ働きを利用する（A）。Bの『恐怖を分析させる』、Cの『発作時の対処法』は本文に無い。"
+  },
+  {
+   "ev": "Each exposure trial will involve a certain degree of distress in the patient",
+   "note": "for that same reason＝前文の『曝露のたびに患者が苦痛を感じる（＝非倫理的とする療法家もいる）』（A）。Cは ethical に引かれた誤答（倫理的懸念を持つのは psychotherapists で、神経科学者ではない）。"
+  },
+  {
+   "ev": "seems to modulate the neurons' ability to adjust their signalling in response to events",
+   "note": "modulate the neurons' ability to adjust their signalling in response to events＝ニューロンが刺激にどう反応するかに影響する（C）。Aの『少量でないと危険』は無い（at very low doses は効果の条件）。Bは acrophobia の試験だけを見た言い過ぎ。"
+  },
+  {
+   "ev": "there is a very real risk of relapse",
+   "note": "some people have misgivings … there is a very real risk of relapse＝効果が長続きしないかもしれない（A）。Dの『進歩がなく落胆』は従来の曝露療法の問題として出てくる（Thanks to improvement being so slow）。DCSの欠点ではない。"
+  },
+  {
+   "ev": "thereby maintaining the strength of feeling associated with the original memory",
+   "note": "記憶は想起時にも書き換わりうる→タンパク質の働きで再固定され、元の記憶に結びついた感情の強さが保たれる＝記憶の感情的な力が自然に保持される仕組み（D）。Aの『タンパク質が想起に影響』はずれ（影響するのは再固定）。"
+  },
+  {
+   "ev": "they were able to approach them",
+   "note": "still don't like spiders, they were able to approach them＝引き金（クモ）に耐えられるようになる（B）。Aの『恒久的でない』は逆寄り（3か月後も効果が続いた）。"
+  },
+  {
+   "ev": "But at the end of the session, I realized the ultrasound wasn't on.",
+   "note": "超音波の電源が入っていなかったのに選手は良くなったと言った＝プラセボの効果を自分の目で見た（A）。Bの『理論を試した』は逆（偶然気づいた＝light bulb moment）。"
+  },
+  {
+   "ev": "The study examined five trials in which participants were told they were getting a placebo, and the conclusion was that doing so honestly can work.",
+   "note": "従来はだまさないと効かないと思われていた（インフォームドコンセントと矛盾）→新研究で、正直に伝えても効く＝だまさなくても有効（A）。Dの『幅広い病気』は段落冒頭の depression, psoriasis … に引かれた誤答（理由ではない）。"
+  },
+  {
+   "ev": "whose genuine counterparts notch up nearly three million prescriptions in Australia annually",
+   "note": "notch up＝（数を）積み上げる。本物の睡眠薬は年に約300万件処方される＝非常に広く使われている（D）。だからプラセボで医療費を減らせる、という次の文につながる。"
+  },
+  {
+   "ev": "Treatment is always part medical and part ritual",
+   "note": "open-hidden 効果（知って飲むと鎮痛薬が2倍効く）／治療は part ritual（儀式）＝治療の提示のされ方が重要（A）。Bの『内容より投与方法が重要』は言い過ぎ（part medical and part ritual）。Dの『医師が信じるか』は無い。"
+  },
+  {
+   "ev": "framing it a way that minimizes negative expectations",
+   "note": "ノセボ効果（警告された人ほど副作用を訴える）を He's aiming to reverse that＝『30%起こる』ではなく『70%起こらない』と伝えて副作用を経験する人を減らす（B）。Dの『悲観的な患者は副作用が多いか調べる』は既に分かっている前提で、目的ではない。"
+  },
+  {
+   "ev": "It can be traced back to a study from the 1970s",
+   "note": "It can be traced back to a study from the 1970s の It＝前文の a body of research（研究の蓄積）（C）。研究の流れを『1970年代の研究にさかのぼる』と言うので、『生物学的反応』（D）ではなく『研究』が主語として自然。"
+  },
+  {
+   "ev": "Professor Andrea Evers of Leiden University is running a study that capitalizes on this conditioning effect",
+   "note": "Ader は味覚嫌悪の条件づけを試していて、偶然免疫が『学習して』弱まることを見つけた→Evers はその条件づけ効果を capitalizes on（利用）＝偶然発見された反応を活用（B）。Dは『ラットと同じか調べる』で、本文は効果を治療に使う研究。"
+  },
+  {
+   "ev": "'Softer' sciences, such as psychology, get marginalized because it's the hard stuff that's associated with what it means to be a doctor.",
+   "note": "医学教育は生物医学的事実中心で、心理学のような『ソフトな』科学は脇に追いやられる＝プラセボは身体的というより心理的な効果だから省かれる（D）。Bの『効くと信じていない』は本文に無い（嫌うのは doctor のアイデンティティの問題）。"
+  }
+ ]
+}

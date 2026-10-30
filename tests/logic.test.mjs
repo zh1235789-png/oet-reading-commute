@@ -126,3 +126,11 @@ test('answer() はその日の回答数を数える', () => {
   a.answer({ id: 'q7', key: 'A' }, 'B');
   assert.equal(a.$('S').days['2026-09-21'], 2);
 });
+
+// Official の過去誤答ラベルが「RNaNで誤答」にならない（2026-10-30）
+test('過去誤答のラベル：SOLO は R番号、Official はセット名', () => {
+  const app = loadApp({ today: '2026-10-30T09:00:00+09:00' });
+  const pastLabel = app.$('pastLabel');
+  assert.equal(pastLabel({ set: '02', past: 'B' }), 'R2で誤答');
+  assert.equal(pastLabel({ set: 'O3', past: 'D' }, true), 'Official03で誤答（Dを選択）');
+});
