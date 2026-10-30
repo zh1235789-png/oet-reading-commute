@@ -290,7 +290,7 @@ function renderToday(){
   const dueB = ITEMS.filter(i => i.part==='B' && status(i)==='due').length;
   const dueC = ITEMS.filter(i => i.part==='C' && status(i)==='due').length;
   const nb = nextItem('B'), nc = nextItem('C');
-  const lbl = it => { const s = status(it); return s==='due' ? '<span class="pill due">復習</span>' : s==='new' ? (it.past ? `<span class="pill past">${pastLabel(it)}</span>` : '<span class="pill">未回答</span>') : '<span class="pill">再挑戦</span>'; };
+  const lbl = it => { const s = status(it); return s==='due' ? '<span class="pill due">復習</span>' : s==='new' ? '<span class="pill">未回答</span>' : '<span class="pill">再挑戦</span>'; };
   $('#main').innerHTML = `
     <div class="card"><div class="stats">
       <div class="stat"><b>${done}</b><span>今日解いた数</span></div>
@@ -336,7 +336,7 @@ function renderList(part){
       const st = status(it), r = rec(it.id);
       const dot = !r ? '' : r.lastOk ? 'ok' : 'ng';
       const title = part==='B' ? it.title : it.q;
-      html += `<button class="row" data-go="${it.id}"><span class="num">${part}${it.n}</span><span class="tt">${esc(title)}</span>${it.past?'<span class="pill past">R誤</span>':''}${st==='due'?'<span class="pill due">復習</span>':''}<span class="dot ${dot}"></span></button>`;
+      html += `<button class="row" data-go="${it.id}"><span class="num">${part}${it.n}</span><span class="tt">${esc(title)}</span>${st==='due'?'<span class="pill due">復習</span>':''}<span class="dot ${dot}"></span></button>`;
     });
     html += '</div>';
   });
@@ -358,7 +358,8 @@ function renderItem(it){
   const meta = `<div class="meta"><span class="pill ${isB?'b':'c'}">Part ${it.part}</span>
       ${isB ? '' : `<span class="pill">Text${it.t+1}「${esc(it.text.title)}」第${it.p+1}段落</span>`}
       ${r ? `<span class="pill ${r.lastOk?'okp':'past'}">前回 ${r.lastOk?'正解':'不正解'}（${r.n}回目済）</span>` : ''}</div>`;
-  const past = it.past ? `<div class="pastnote" id="pastnote">📌 ${pastLabel(it)}した問題。同じ罠にかからないか確認。</div>` : '';
+  // 過去の誤答は解答後にだけ出す（解答前に出すと「前回の答えは違う」というヒントになる）
+  const past = it.past ? '<div class="pastnote" id="pastnote" hidden></div>' : '';
   const passage = isB
     ? `<div class="card passage" id="psg"><h3>${esc(it.title)}</h3>${it.paras.map(p => `<p>${esc(p)}</p>`).join('')}</div>`
     : `<div class="card passage" id="psg"><p>${esc(it.text.paras[it.p])}</p></div>`;
@@ -388,7 +389,7 @@ function reveal(it, choice){
       b.querySelector('.ob').insertAdjacentHTML('beforeend', `<span class="oja">${esc(it.oja[i])}</span>`);
     }
   });
-  if (it.past) $('#pastnote').textContent = `📌 ${pastLabel(it, true)}。今回は ${choice}${ok ? ' → 克服 🎉' : ' → 要復習'}`;
+  if (it.past) { $('#pastnote').hidden = false; $('#pastnote').textContent = `📌 ${pastLabel(it, true)}。今回は ${choice}${ok ? ' → 克服 🎉' : ' → 要復習'}`; }
   if (!isB) $('#psg').innerHTML = `<p>${highlight(it.text.paras[it.p], it.ev)}</p>`;
   const res = `<div class="result ${ok?'ok':'ng'}">${ok ? '✅ 正解' : `❌ 不正解 — 正解は ${it.key}`}${(it.alt||[]).length ? `（${it.alt.join('/')}も正解扱い）` : ''}</div>`;
   const doubt = it.doubt ? `<div class="doubt">${esc(it.doubt)}</div>` : '';

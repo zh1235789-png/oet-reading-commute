@@ -134,3 +134,14 @@ test('過去誤答のラベル：SOLO は R番号、Official はセット名', (
   assert.equal(pastLabel({ set: '02', past: 'B' }), 'R2で誤答');
   assert.equal(pastLabel({ set: 'O3', past: 'D' }, true), 'Official03で誤答（Dを選択）');
 });
+
+// 解答前に「過去に間違えた」ことを見せない（2026-10-30）。前回の答えを外せるヒントになるため。
+// スタブDOMでは innerHTML を捕まえられないので、テンプレートの文字列で固定する。
+test('過去の誤答は解答前に表示しない（問題画面・ホーム・一覧）', async () => {
+  const { readFileSync } = await import('node:fs');
+  const html = readFileSync(new URL('../index.html', import.meta.url), 'utf8');
+  assert.match(html, /id="pastnote" hidden><\/div>/);
+  assert.doesNotMatch(html, /した問題。同じ罠/);
+  assert.doesNotMatch(html, /R誤</);
+  assert.doesNotMatch(html, /pill past">\$\{pastLabel/);
+});
