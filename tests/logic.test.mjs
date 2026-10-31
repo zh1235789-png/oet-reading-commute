@@ -145,3 +145,14 @@ test('過去の誤答は解答前に表示しない（問題画面・ホーム�
   assert.doesNotMatch(html, /R誤</);
   assert.doesNotMatch(html, /pill past">\$\{pastLabel/);
 });
+
+test('セット名：Sample Test と Kaplan も読める名前で出る', () => {
+  const app = loadApp({ today: '2026-10-30T09:00:00+09:00' });
+  const setLabel = app.$('setLabel'), pastLabel = app.$('pastLabel');
+  assert.equal(setLabel('03'), 'Set03');
+  assert.equal(setLabel('O2'), 'Official02');
+  assert.equal(setLabel('S1'), 'Sample Test 1');
+  assert.equal(setLabel('K1'), 'Kaplan 練習');
+  assert.equal(setLabel('K2'), 'Kaplan 模試');
+  assert.equal(pastLabel({ set: 'S1', past: 'B' }, true), 'Sample Test 1で誤答（Bを選択）');
+});

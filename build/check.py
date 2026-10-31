@@ -1,8 +1,10 @@
-import json, sys, re
+import json, sys, re, os
+# OET_DATA で非公開データのフォルダも検査できる（既定は build/）
+ROOT = os.environ.get('OET_DATA', 'build')
 def norm(s): return re.sub(r'\s+',' ', s.replace('’',"'").replace('‘',"'").replace('“','"').replace('”','"').replace('&amp;','&')).strip()
-base = json.load(open('build/base.json'))
+base = json.load(open(f'{ROOT}/base.json'))
 for sid in sys.argv[1:]:
-    a = json.load(open(f'build/ann/{sid}.json'))
+    a = json.load(open(f'{ROOT}/ann/{sid}.json'))
     s = base[sid]
     assert len(a['B'])==6 and len(a['C']) in (0,16), (sid, len(a['B']), len(a['C']))
     for i,b in enumerate(a['B']):

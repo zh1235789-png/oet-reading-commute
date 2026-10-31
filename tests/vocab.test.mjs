@@ -1,6 +1,6 @@
 // 語彙リストの健全性。
 // 本文に無い語を載せると「本文で確認できない語を覚える」ことになるので、
-// 全286問（SOLO Set01-10 の220問＋Official01-03 の66問）について「語数がある・重複が無い・その問題の英文に実在する」を固定する。
+// 全286問（SOLO Set01-10 の220問＋Official01-03 の66問。暗号化した公式問題は locked.test.mjs で検査）について「語数がある・重複が無い・その問題の英文に実在する」を固定する。
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { loadApp } from './harness.mjs';

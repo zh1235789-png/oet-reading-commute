@@ -54,6 +54,8 @@ export function loadApp({ today = null, storage = {}, expectClean = false } = {}
     alert: () => {}, confirm: () => true, prompt: () => null,
     setTimeout, clearTimeout, setInterval, clearInterval,
     structuredClone,
+    // 公式問題の復号（WebCrypto）に使う
+    crypto: globalThis.crypto, TextEncoder, TextDecoder, atob, btoa,
     fetch: async () => { throw new Error('fetch はテストでは使えません'); },
     FileReader: stub(),
     speechSynthesis: stub(),

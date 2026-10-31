@@ -1,4 +1,6 @@
 import json, re, sys, os
+# OET_DATA で非公開データのフォルダも検査できる（既定はカレント＝build/）
+ROOT = os.environ.get('OET_DATA', '.')
 def norm(x): return re.sub(r'\s+',' ', x.replace('’',"'").replace('‘',"'").replace('“','"').replace('”','"').replace('&amp;','&')).strip().lower()
 
 # 語形変化（inoculate → inoculates / turn away → turned away）を許すゆるい照合。
@@ -13,12 +15,12 @@ def contains(phrase, txt):
     toks = [stem(t) for t in norm(phrase).split() if t not in ('a','an','the','to','of','and','be','with','for','on','in','their','your','as')]
     pool = {stem(t) for t in re.findall(r"[a-z0-9-]+", txt)}
     return all(t in pool for t in toks if t)
-base = json.load(open('base.json'))
+base = json.load(open(f'{ROOT}/base.json'))
 bad = 0
 for sid in sys.argv[1:]:
-    f = f'ann/vocab/{sid}.json'
+    f = f'{ROOT}/ann/vocab/{sid}.json'
     if not os.path.exists(f): print(sid, 'MISSING'); continue
-    v = json.load(open(f)); s = base[sid]; an = json.load(open(f'ann/{sid}.json'))
+    v = json.load(open(f)); s = base[sid]; an = json.load(open(f'{ROOT}/ann/{sid}.json'))
     assert len(v['B'])==6 and len(v['C']) in (0,16)  # Official は B だけのことがある, (sid, len(v['B']), len(v['C']))
     for i,b in enumerate(s['B']):
         txt = norm(' '.join(b['paras']) + ' ' + b['title'] + ' ' + b['q'] + ' ' + ' '.join(b['opts']))

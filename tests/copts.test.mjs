@@ -8,7 +8,7 @@ const app = loadApp({ today: '2026-10-18T09:00:00+09:00' });
 const SETS = app.$('SETS');
 const items = norm(SETS).flatMap((s) => s.C.map((c) => ({ id: `Set${s.id} C${c.n}`, c })));
 
-test('Part C 全208問に選択肢の和訳がある', () => {
+test('Part C 全208問（公開分）に選択肢の和訳がある', () => {
   assert.equal(items.length, 208);
   const missing = items.filter(({ c }) => !Array.isArray(c.oja) || c.oja.length !== 4);
   assert.deepEqual(missing.map((i) => i.id), []);

@@ -138,6 +138,9 @@ details .body{font-size:14px;line-height:1.75;margin-top:8px}
 </nav>
 <script>
 const SETS = /*__DATA__*/[];
+// OET公式 Sample Test と Kaplan は再配布できないので暗号化して埋め込み、合言葉で開く（build.py 参照）
+const LOCKED = /*__LOCKED__*/null;
+const LOCK_KEY = 'oet-reading-commute-pass';
 const KEY = 'oet-reading-commute-v1';
 const INTERVALS = [1, 3, 7, 21];
 let S = load();
@@ -219,15 +222,51 @@ const esc = s => String(s).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':
 const L = 'ABCD';
 function today(d = new Date()){ const z = n => String(n).padStart(2,'0'); return `${d.getFullYear()}-${z(d.getMonth()+1)}-${z(d.getDate())}`; }
 function addDays(ds, n){ const d = new Date(ds + 'T00:00:00'); d.setDate(d.getDate() + n); return today(d); }
-function pastLabel(it, letter){ return it.past ? `${/^O\d+$/.test(it.set) ? setLabel(it.set) : 'R' + (+it.set)}で誤答` + (letter ? `（${it.past}を選択）` : '') : ''; }
+function pastLabel(it, letter){ return it.past ? `${/^\d+$/.test(it.set) ? 'R' + (+it.set) : setLabel(it.set)}で誤答` + (letter ? `（${it.past}を選択）` : '') : ''; }
 
 /* flatten items */
-const ITEMS = [];
-SETS.forEach(s => {
-  s.B.forEach(b => ITEMS.push(Object.assign({part:'B', set:s.id, id:`${s.id}-B${b.n}`}, b)));
-  s.C.forEach(c => ITEMS.push(Object.assign({part:'C', set:s.id, id:`${s.id}-C${c.n}`, text:s.texts[c.t]}, c)));
-});
-const BYID = Object.fromEntries(ITEMS.map(i => [i.id, i]));
+const ITEMS = [], BYID = {};
+function addSets(list){
+  list.forEach(s => {
+    if (SETS.some(x => x.id === s.id && x !== s)) return;  // 二重に開いても増やさない
+    if (!SETS.includes(s)) SETS.push(s);
+    s.B.forEach(b => ITEMS.push(Object.assign({part:'B', set:s.id, id:`${s.id}-B${b.n}`}, b)));
+    s.C.forEach(c => ITEMS.push(Object.assign({part:'C', set:s.id, id:`${s.id}-C${c.n}`, text:s.texts[c.t]}, c)));
+  });
+  ITEMS.forEach(i => { BYID[i.id] = i; });
+}
+addSets(SETS.slice());
+
+/* ---------- 公式問題（暗号化）の解錠 ---------- */
+/* global TextEncoder, TextDecoder */
+// LOCK.state: none（暗号化データなし）/ locked / open
+const LOCK = {state: LOCKED ? 'locked' : 'none', err: '', busy: false};
+function b64(s){ return Uint8Array.from(atob(s), c => c.charCodeAt(0)); }
+async function decryptLocked(env, pass){
+  const base = await crypto.subtle.importKey('raw', new TextEncoder().encode(pass), 'PBKDF2', false, ['deriveKey']);
+  const key = await crypto.subtle.deriveKey({name:'PBKDF2', salt:b64(env.salt), iterations:env.iter, hash:'SHA-256'}, base, {name:'AES-GCM', length:256}, false, ['decrypt']);
+  const pt = await crypto.subtle.decrypt({name:'AES-GCM', iv:b64(env.iv)}, key, b64(env.ct));
+  return JSON.parse(new TextDecoder().decode(pt));
+}
+function lockedLabel(){ return 'OET公式 Sample Test・Kaplan'; }
+async function unlock(pass, quiet){
+  if (LOCK.state !== 'locked' || !pass) return LOCK.state === 'open';
+  LOCK.busy = true; LOCK.err = '';
+  try {
+    addSets(await decryptLocked(LOCKED, pass));
+    LOCK.state = 'open';
+    try { localStorage.setItem(LOCK_KEY, pass); } catch(e){}
+  } catch(e) {
+    LOCK.err = e && e.name === 'OperationError' ? '合言葉が違います' : '開けませんでした（' + ((e && e.message) || e) + '）';
+    if (quiet) { try { localStorage.removeItem(LOCK_KEY); } catch(e2){} }  // 合言葉が変わった後の古い保存は捨てる
+  }
+  LOCK.busy = false;
+  render();
+  return LOCK.state === 'open';
+}
+function lockNote(){
+  return LOCK.state === 'locked' ? `<div class="card tiny">🔒 ${lockedLabel()} は合言葉で表示されます（記録タブで入力）</div>` : '';
+}
 const rec = id => S.items[id];
 function status(it){
   const r = rec(it.id);
@@ -275,6 +314,7 @@ function setTab(t){
   render(); window.scrollTo(0,0);
 }
 function render(){
+  if (VIEW && !BYID[VIEW.id]) VIEW = null;  // 閉じたセットの問題を開いていた場合
   if (VIEW) return renderItem(BYID[VIEW.id]);
   ({today:renderToday, B:()=>renderList('B'), C:()=>renderList('C'), log:renderLog})[TAB]();
 }
@@ -309,14 +349,21 @@ function renderToday(){
       <div class="muted">該当段落1つ＋4択 → 根拠文ハイライト</div>
       <button class="bigbtn c" data-go="${nc.id}">C を1問解く</button>
     </div>
+    ${lockNote()}
     ${SY.token ? `<p class="tiny" id="syncbadge">${esc(syncText())}</p>` : ''}
     <p class="tiny">出題順：復習期限の来た問題 → 未回答（過去模試の誤答を優先）→ しばらく解いていない問題。間違えた問題は1→3→7→21日後に再出題。</p>`;
   $('#main').querySelectorAll('[data-go]').forEach(b => b.onclick = () => openItem(b.dataset.go, 'today'));
 }
 function openItem(id, from){ VIEW = {id, from}; render(); window.scrollTo(0,0); }
 
-// SOLO Practice は Set01〜10、公式模試は O1＝Official01 のように持つ
-function setLabel(id){ return /^O\d+$/.test(id) ? 'Official' + id.slice(1).padStart(2, '0') : 'Set' + id; }
+// SOLO Practice は Set01〜10、SOLO の公式模試は O1＝Official01、OET公式 Sample Test は S1、Kaplan は K1（練習）・K2（模試）
+const SET_NAMES = { K1: 'Kaplan 練習', K2: 'Kaplan 模試' };
+function setLabel(id){
+  if (SET_NAMES[id]) return SET_NAMES[id];
+  if (/^O\d+$/.test(id)) return 'Official' + id.slice(1).padStart(2, '0');
+  if (/^S\d+$/.test(id)) return 'Sample Test ' + id.slice(1);
+  return 'Set' + id;
+}
 
 function renderList(part){
   const nSets = SETS.filter(s => s[part].length).length;
@@ -341,6 +388,7 @@ function renderList(part){
     html += '</div>';
   });
   if (!any) html += '<div class="empty">該当する問題はありません</div>';
+  html += lockNote();
   $('#main').innerHTML = html;
   $('#main').querySelectorAll('[data-f]').forEach(b => b.onclick = () => { FILTER[part] = b.dataset.f; render(); });
   $('#main').querySelectorAll('[data-go]').forEach(b => b.onclick = () => openItem(b.dataset.go, part));
@@ -442,6 +490,15 @@ function renderLog(){
     <div class="card"><div class="muted">Part B</div>${cells('B')}
       <div class="legend"><span><i style="background:var(--ok)"></i>正解</span><span><i style="background:#15803d;outline:1px solid var(--bad)"></i>ミス後に正解</span><span><i style="background:var(--bad)"></i>直近不正解</span><span><i style="background:var(--line)"></i>未回答</span></div></div>
     <div class="card"><div class="muted">Part C</div>${cells('C')}</div>
+    ${LOCK.state === 'none' ? '' : `<div class="card"><div class="muted">${LOCK.state === 'open' ? '🔓' : '🔒'} ${lockedLabel()}</div>
+      ${LOCK.state === 'open'
+        ? `<p class="tiny" style="margin:8px 0 0">この端末で表示中です。合言葉はこの端末の中にだけ保存されています。</p>
+           <div class="small-btns"><button id="lockoff">この端末で閉じる</button></div>`
+        : `<p class="tiny" style="margin:8px 0">再配布できない教材なので、合言葉を入れた端末でだけ表示します。解答記録は閉じていても消えません。</p>
+           <input id="pass" type="password" autocomplete="current-password" placeholder="合言葉" style="width:100%;padding:10px;border-radius:10px;border:1px solid var(--line);background:var(--card2);color:var(--txt);font-size:16px">
+           <div class="small-btns"><button id="unlock"${LOCK.busy ? ' disabled' : ''}>${LOCK.busy ? '確認中…' : '開く'}</button></div>
+           ${LOCK.err ? `<p class="tiny" style="color:var(--bad)">${esc(LOCK.err)}</p>` : ''}`}
+    </div>`}
     <div class="card"><div class="muted">iPhone・iPad間の同期（GitHubの非公開Gist）</div>
       ${SY.token ? `<p class="tiny" id="syncbadge" style="margin:8px 0 0">${esc(syncText())}</p>
         <div class="small-btns"><button id="syncgo">今すぐ同期</button><button id="syncoff">この端末の同期を解除</button></div>`
@@ -461,6 +518,8 @@ function renderLog(){
   $('#rst').onclick = () => { if (confirm('すべての回答記録を消去します。' + (SY.token ? '同期中の他の端末からも消えます。' : '') + 'よろしいですか？')) { S.items = {}; S.days = {}; S.others = {}; S.resetAt = Date.now(); save(); render(); syncNow(); } };
   if ($('#syncon')) $('#syncon').onclick = () => { const t = $('#tok').value.trim(); if (!t) return; SY = {token:t}; saveSY(); render(); syncNow(); };
   if ($('#syncgo')) $('#syncgo').onclick = () => syncNow();
+  if ($('#unlock')) $('#unlock').onclick = () => { const v = $('#pass').value.trim(); if (v) unlock(v, false); };
+  if ($('#lockoff')) $('#lockoff').onclick = () => { if (confirm('この端末で公式問題を閉じます（解答記録は残ります）')) { try { localStorage.removeItem(LOCK_KEY); } catch(e){} location.reload(); } };
   if ($('#syncoff')) $('#syncoff').onclick = () => { if (confirm('この端末の同期を解除します（記録はこの端末に残ります）')) { SY = {}; saveSY(); render(); } };
 }
 
@@ -470,6 +529,7 @@ $('#fsm').onclick = () => { S.fs = Math.max(13, S.fs - 1); applyFs(); save(); };
 $('#fsp').onclick = () => { S.fs = Math.min(22, S.fs + 1); applyFs(); save(); };
 document.querySelectorAll('nav button').forEach(b => b.onclick = () => setTab(b.dataset.tab));
 applyFs(); render();
+(() => { let p = null; try { p = localStorage.getItem(LOCK_KEY); } catch(e){} if (p) unlock(p, true); })();
 syncNow();
 document.addEventListener('visibilitychange', () => { if (document.visibilityState === 'visible') syncNow(); });
 window.addEventListener('online', () => syncNow());
