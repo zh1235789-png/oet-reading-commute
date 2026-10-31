@@ -480,7 +480,18 @@ function renderLog(){
   let heat = '';
   for (let k = 27; k >= 0; k--) { const d = addDays(today(), -k), n = dayCount(d); heat += `<div class="${n>=6?'l3':n>=3?'l2':n>=1?'l1':''}" title="${d}: ${n}問"></div>`; }
   const weakC = ITEMS.filter(i => rec(i.id) && !rec(i.id).lastOk).length;
+  // 合言葉の欄：まだ開いていない端末では見つけやすいよう一番上、開いた後は同期の上に置く
+  const lockCard = LOCK.state === 'none' ? '' : `<div class="card"><div class="muted">${LOCK.state === 'open' ? '🔓' : '🔒'} ${lockedLabel()}</div>
+      ${LOCK.state === 'open'
+        ? `<p class="tiny" style="margin:8px 0 0">この端末で表示中です。合言葉はこの端末の中にだけ保存されています。</p>
+           <div class="small-btns"><button id="lockoff">この端末で閉じる</button></div>`
+        : `<p class="tiny" style="margin:8px 0">再配布できない教材なので、合言葉を入れた端末でだけ表示します。解答記録は閉じていても消えません。</p>
+           <input id="pass" type="password" autocomplete="current-password" placeholder="合言葉" style="width:100%;padding:10px;border-radius:10px;border:1px solid var(--line);background:var(--card2);color:var(--txt);font-size:16px">
+           <div class="small-btns"><button id="unlock"${LOCK.busy ? ' disabled' : ''}>${LOCK.busy ? '確認中…' : '開く'}</button></div>
+           ${LOCK.err ? `<p class="tiny" style="color:var(--bad)">${esc(LOCK.err)}</p>` : ''}`}
+    </div>`;
   $('#main').innerHTML = `
+    ${LOCK.state === 'locked' ? lockCard : ''}
     <div class="card"><div class="stats">
       <div class="stat"><b>${a.rate ?? '–'}${a.rate!=null?'%':''}</b><span>B 正答率（${a.seen}/${a.total}問）</span></div>
       <div class="stat"><b>${c.rate ?? '–'}${c.rate!=null?'%':''}</b><span>C 正答率（${c.seen}/${c.total}問）</span></div>
@@ -490,15 +501,7 @@ function renderLog(){
     <div class="card"><div class="muted">Part B</div>${cells('B')}
       <div class="legend"><span><i style="background:var(--ok)"></i>正解</span><span><i style="background:#15803d;outline:1px solid var(--bad)"></i>ミス後に正解</span><span><i style="background:var(--bad)"></i>直近不正解</span><span><i style="background:var(--line)"></i>未回答</span></div></div>
     <div class="card"><div class="muted">Part C</div>${cells('C')}</div>
-    ${LOCK.state === 'none' ? '' : `<div class="card"><div class="muted">${LOCK.state === 'open' ? '🔓' : '🔒'} ${lockedLabel()}</div>
-      ${LOCK.state === 'open'
-        ? `<p class="tiny" style="margin:8px 0 0">この端末で表示中です。合言葉はこの端末の中にだけ保存されています。</p>
-           <div class="small-btns"><button id="lockoff">この端末で閉じる</button></div>`
-        : `<p class="tiny" style="margin:8px 0">再配布できない教材なので、合言葉を入れた端末でだけ表示します。解答記録は閉じていても消えません。</p>
-           <input id="pass" type="password" autocomplete="current-password" placeholder="合言葉" style="width:100%;padding:10px;border-radius:10px;border:1px solid var(--line);background:var(--card2);color:var(--txt);font-size:16px">
-           <div class="small-btns"><button id="unlock"${LOCK.busy ? ' disabled' : ''}>${LOCK.busy ? '確認中…' : '開く'}</button></div>
-           ${LOCK.err ? `<p class="tiny" style="color:var(--bad)">${esc(LOCK.err)}</p>` : ''}`}
-    </div>`}
+    ${LOCK.state === 'open' ? lockCard : ''}
     <div class="card"><div class="muted">iPhone・iPad間の同期（GitHubの非公開Gist）</div>
       ${SY.token ? `<p class="tiny" id="syncbadge" style="margin:8px 0 0">${esc(syncText())}</p>
         <div class="small-btns"><button id="syncgo">今すぐ同期</button><button id="syncoff">この端末の同期を解除</button></div>`
