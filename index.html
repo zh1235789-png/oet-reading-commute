@@ -415,7 +415,7 @@ function renderItem(it){
   $('#main').innerHTML = `${meta}${past}${passage}
     <div class="card">
       <div class="qbox">${it.n}. ${esc(it.q)}</div>
-      ${isB ? `<div class="qja">${esc(it.qja)}</div>` : ''}
+      ${isB && it.qja ? `<div class="qja" id="qja" hidden>${esc(it.qja)}</div>` : ''}
       <div id="opts">${opts}</div>
       <div id="after"></div>
     </div>`;
@@ -437,6 +437,8 @@ function reveal(it, choice){
       b.querySelector('.ob').insertAdjacentHTML('beforeend', `<span class="oja">${esc(it.oja[i])}</span>`);
     }
   });
+  // 設問の和訳は解答後に出す（解答前に出すと英語を読まずに解けてしまう）
+  if ($('#qja')) $('#qja').hidden = false;
   if (it.past) { $('#pastnote').hidden = false; $('#pastnote').textContent = `📌 ${pastLabel(it, true)}。今回は ${choice}${ok ? ' → 克服 🎉' : ' → 要復習'}`; }
   if (!isB) $('#psg').innerHTML = `<p>${highlight(it.text.paras[it.p], it.ev)}</p>`;
   const res = `<div class="result ${ok?'ok':'ng'}">${ok ? '✅ 正解' : `❌ 不正解 — 正解は ${it.key}`}${(it.alt||[]).length ? `（${it.alt.join('/')}も正解扱い）` : ''}</div>`;

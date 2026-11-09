@@ -146,6 +146,16 @@ test('過去の誤答は解答前に表示しない（問題画面・ホーム�
   assert.doesNotMatch(html, /pill past">\$\{pastLabel/);
 });
 
+// Part B の設問の和訳は解答後にだけ出す（2026-11-09）。解答前に出すと英語を読まずに解けてしまう。
+test('Part B の設問の和訳は解答前に表示しない', async () => {
+  const { readFileSync } = await import('node:fs');
+  const html = readFileSync(new URL('../index.html', import.meta.url), 'utf8');
+  assert.match(html, /<div class="qja" id="qja" hidden>/);
+  assert.doesNotMatch(html, /<div class="qja">/);
+  const reveal = html.slice(html.indexOf('function reveal('), html.indexOf('function renderLog('));
+  assert.match(reveal, /\$\('#qja'\)\.hidden = false/);
+});
+
 test('セット名：Sample Test と Kaplan も読める名前で出る', () => {
   const app = loadApp({ today: '2026-10-30T09:00:00+09:00' });
   const setLabel = app.$('setLabel'), pastLabel = app.$('pastLabel');
