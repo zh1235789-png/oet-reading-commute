@@ -21,6 +21,9 @@ PAST = {  # R{n}=Set{n} の過去誤答（Obsidian R1〜R5ノートより）: �
  # OET公式 Sample Test 1（2026-09-02 採点：Obsidian「2026-09-02　S1」）
  'S1': {'B3':'B','B4':'C','B6':'A','C8':'D','C9':'A','C10':'C','C12':'C','C15':'B','C16':'B','C18':'A','C21':'D','C22':'D'},
 }
+# 模試としてまだ解いていないセット。ドリルに出すと本番の模試の答えを先に知ってしまうので、
+# ドリルで一度でも答えた問題を除き、出題・一覧・記録に出さない。模試で解いて採点したらここから消して再ビルド。
+NOT_YET = ['S2', 'S3', 'S4', 'S5', 'K1', 'K2']
 # 並び順：SOLO Set01〜10 → SOLO Official → OET公式 Sample Test → Kaplan
 ORDER = {'O': 1, 'S': 2, 'K': 3}
 
@@ -84,6 +87,7 @@ if __name__ == '__main__':
         print('⚠️ 非公開データのフォルダが見つからないため、公式問題（Sample Test・Kaplan）なしでビルドします')
     tpl = open(f'{D}/template.html', encoding='utf-8').read()
     out = tpl.replace('/*__DATA__*/[]', json.dumps(sets, ensure_ascii=False, separators=(',',':')))
+    out = out.replace('/*__NOT_YET__*/[]', json.dumps(NOT_YET))
     out = out.replace('/*__LOCKED__*/null', json.dumps(locked, separators=(',',':')))
     open(f'{D}/../index.html','w',encoding='utf-8').write(out)
     count = lambda ss, p: sum(len(s[p]) for s in ss)
