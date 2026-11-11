@@ -36,6 +36,12 @@ def build_sets(root):
         texts = [dict(title=t['title'], paras=[norm(p) for p in t['paras']]) for t in s['texts']]
         voc = json.load(open(f'{root}/ann/vocab/{sid}.json'))
         copts = json.load(open(f'{root}/ann/copts/{sid}.json'))
+        # Part C の設問と根拠文の和訳（2026-11-11〜。無いセットは和訳なしで出す）
+        cja_path = f'{root}/ann/cja/{sid}.json'
+        cja = json.load(open(cja_path))['C'] if os.path.exists(cja_path) else None
+        # Part B の根拠（本文中でハイライトする箇所。1問に複数可）
+        bev_path = f'{root}/ann/bev/{sid}.json'
+        bev = json.load(open(bev_path))['B'] if os.path.exists(bev_path) else None
         # 件数が合わないまま進むと、IndexError で止まるか、余った訳が黙って捨てられる。
         # assert は python -O で消えるので、データ検証には使わない（2026-10-18 Codex指摘）。
         def need(cond, msg):
@@ -44,12 +50,21 @@ def build_sets(root):
         need(len(voc['B']) == len(s['B']) and len(voc['C']) == len(s['C']), 'vocab の件数が問題数と一致しません')
         need(len(copts['C']) == len(s['C']), 'copts の件数が問題数と一致しません')
         need(all(len(x) == len(c['opts']) for x, c in zip(copts['C'], s['C'])), 'copts の選択肢数が一致しません')
+        need(cja is None or len(cja) == len(s['C']), 'cja の件数が問題数と一致しません')
+        need(bev is None or len(bev) == len(s['B']), 'bev の件数が問題数と一致しません')
+        if bev:
+            for b, evs in zip(s['B'], bev):
+                paras = [norm(p) for p in b['paras']]
+                need(evs, f"B{b['n']} の根拠が空です")
+                for e in evs:
+                    need(any(norm(e) in p for p in paras), f"B{b['n']} の根拠が本文に見つかりません: {e[:60]}")
+        need(cja is None or all(x.get('q', '').strip() and x.get('ev', '').strip() for x in cja), 'cja に空の和訳があります')
         B = []
         for i,b in enumerate(s['B']):
             x = a['B'][i]
             B.append(dict(n=b['n'], title=norm(b['title']), paras=[norm(p) for p in b['paras']], q=norm(b['q']), opts=[norm(o) for o in b['opts']],
                           key=b['key'], qja=x['qja'], ja=x['ja'], o=x['o'], exp=x['exp'], pt=x['pt'], doubt=x.get('doubt'),
-                          voc=voc['B'][i], past=PAST.get(sid,{}).get(f"B{b['n']}")))
+                          voc=voc['B'][i], ev=[norm(e) for e in bev[i]] if bev else None, past=PAST.get(sid,{}).get(f"B{b['n']}")))
         C = []
         for i,c in enumerate(s['C']):
             x = a['C'][i]; paras = texts[c['t']]['paras']
@@ -57,7 +72,7 @@ def build_sets(root):
             need(len(p) == 1, f"C{c['n']} の根拠文が本文の1段落に見つかりません")
             C.append(dict(n=c['n'], t=c['t'], p=p[0], q=norm(c['q']), opts=[norm(o) for o in c['opts']], key=c['key'], ev=norm(x['ev']),
                           note=x['note'], doubt=x.get('doubt'), alt=x.get('alt',[]),
-                          voc=voc['C'][i], oja=copts['C'][i], past=PAST.get(sid,{}).get(f"C{c['n']}")))
+                          voc=voc['C'][i], oja=copts['C'][i], qja=cja[i]['q'] if cja else None, evja=cja[i]['ev'] if cja else None, past=PAST.get(sid,{}).get(f"C{c['n']}")))
         sets.append(dict(id=sid, texts=texts, B=B, C=C))
     return sets
 

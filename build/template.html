@@ -66,6 +66,7 @@ nav button.on{color:var(--txt)}
 mark{background:var(--markbg);color:inherit;border-bottom:2px solid var(--mark);padding:0 1px;border-radius:2px}
 .qbox{font-size:var(--fs);font-weight:700;margin:0 0 4px}
 .qja{font-size:13px;color:var(--dim);margin:0 0 10px}
+.evja{font-size:14px;line-height:1.65;margin:0 0 8px;padding:8px 10px;border-left:3px solid #facc15;background:color-mix(in srgb,#facc15 10%,var(--card))}
 .opt{display:flex;gap:10px;width:100%;text-align:left;background:var(--card2);border:1.5px solid var(--line);color:var(--txt);
   border-radius:12px;padding:12px;margin-bottom:8px;font-size:calc(var(--fs) - 1px);line-height:1.45}
 .opt .lt{flex:none;width:24px;height:24px;border-radius:7px;background:var(--line);display:flex;align-items:center;justify-content:center;font-weight:800;font-size:13px}
@@ -426,6 +427,18 @@ function highlight(text, ev){
   if (i < 0) return esc(text);
   return esc(text.slice(0,i)) + '<mark>' + esc(ev) + '</mark>' + esc(text.slice(i + ev.length));
 }
+// 複数の根拠を1段落にまとめてマーカーする（重なりは1つに寄せる）
+function highlightAll(text, evs){
+  const rs = [];
+  (evs || []).forEach(ev => { let i = text.indexOf(ev); while (i >= 0) { rs.push([i, i + ev.length]); i = text.indexOf(ev, i + ev.length); } });
+  if (!rs.length) return esc(text);
+  rs.sort((a, b) => a[0] - b[0]);
+  const m = [rs[0].slice()];
+  for (const [a, b] of rs.slice(1)) { const last = m[m.length - 1]; if (a <= last[1]) last[1] = Math.max(last[1], b); else m.push([a, b]); }
+  let out = '', pos = 0;
+  for (const [a, b] of m) { out += esc(text.slice(pos, a)) + '<mark>' + esc(text.slice(a, b)) + '</mark>'; pos = b; }
+  return out + esc(text.slice(pos));
+}
 function renderItem(it){
   const r = rec(it.id);
   const isB = it.part === 'B';
@@ -442,7 +455,7 @@ function renderItem(it){
   $('#main').innerHTML = `${meta}${past}${passage}
     <div class="card">
       <div class="qbox">${it.n}. ${esc(it.q)}</div>
-      ${isB && it.qja ? `<div class="qja" id="qja" hidden>${esc(it.qja)}</div>` : ''}
+      ${it.qja ? `<div class="qja" id="qja" hidden>${esc(it.qja)}</div>` : ''}
       <div id="opts">${opts}</div>
       <div id="after"></div>
     </div>`;
@@ -468,6 +481,7 @@ function reveal(it, choice){
   if ($('#qja')) $('#qja').hidden = false;
   if (it.past) { $('#pastnote').hidden = false; $('#pastnote').textContent = `📌 ${pastLabel(it, true)}。今回は ${choice}${ok ? ' → 克服 🎉' : ' → 要復習'}`; }
   if (!isB) $('#psg').innerHTML = `<p>${highlight(it.text.paras[it.p], it.ev)}</p>`;
+  else if (it.ev && it.ev.length) $('#psg').innerHTML = `<h3>${esc(it.title)}</h3>${it.paras.map(p => `<p>${highlightAll(p, it.ev)}</p>`).join('')}`;
   const res = `<div class="result ${ok?'ok':'ng'}">${ok ? '✅ 正解' : `❌ 不正解 — 正解は ${it.key}`}${(it.alt||[]).length ? `（${it.alt.join('/')}も正解扱い）` : ''}</div>`;
   const doubt = it.doubt ? `<div class="doubt">${esc(it.doubt)}</div>` : '';
   const voc = (it.voc && it.voc.length)
@@ -475,10 +489,10 @@ function reveal(it, choice){
         it.voc.map(([w, ja]) => `<div class="vrow"><span class="w">${esc(w)}</span><span class="m">${esc(ja)}</span></div>`).join('')
       }</div></div>` : '';
   const body = isB
-    ? `<div class="sec"><h4>解説</h4><div class="body">${esc(it.exp)}</div></div>
+    ? `${it.ev && it.ev.length ? '<p class="tiny">本文の黄色マーカー＝正解の根拠</p>' : ''}<div class="sec"><h4>解説</h4><div class="body">${esc(it.exp)}</div></div>
        <div class="sec"><h4>ポイント</h4><div class="point">${esc(it.pt)}</div></div>${doubt}${voc}
        <details><summary>本文の和訳</summary><div class="body">${esc(it.ja)}</div></details>`
-    : `<div class="sec"><h4>根拠（黄色マーカー）</h4><div class="point">${esc(it.note)}</div></div>${doubt}${voc}`;
+    : `<div class="sec"><h4>根拠（黄色マーカー）</h4>${it.evja ? `<div class="evja">${esc(it.evja)}</div>` : ''}<div class="point">${esc(it.note)}</div></div>${doubt}${voc}`;
   // ホームから来たときは、このパートのノルマが済んだら残りのパートへ、両方済んだらホームへ
   const other = isB ? 'C' : 'B';
   const nextPart = VIEW.from !== 'today' || quotaLeft(it.part) || !quotaLeft(other) ? it.part : other;
