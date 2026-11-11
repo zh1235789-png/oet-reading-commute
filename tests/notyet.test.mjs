@@ -22,7 +22,7 @@ function withFakeSet(storage = {}) {
 
 test('未実施セットが定義されていて、解いたことのあるセットは入っていない', () => {
   const ids = norm(loadApp({ today: TODAY }).$('[...NOT_YET]'));
-  assert.deepEqual(ids, ['S2', 'S3', 'S4', 'S5', 'K1', 'K2']);
+  assert.deepEqual(ids, ['S2', 'S3', 'S4', 'S5', 'K1', 'K2', 'O2']);
 });
 
 test('未実施セットの未回答問題は出題されない（B・Cとも、全部解き終わっても）', () => {
@@ -40,6 +40,14 @@ test('未実施セットでもドリルで答えた問題は復習に出る', ()
   app.$(`S.items['${id}-B1'] = {n:1, wrong:1, box:0, lastOk:false, last:'2026-11-10', due:'2026-11-11', hist:[]}`);
   assert.equal(app.$(`nextItem('B').id`), `${id}-B1`);
   assert.equal(app.$(`drill().filter(i => i.set === '${id}').length`), 1);
+});
+
+test('Official02 は合言葉なしでもドリルに出ない（模試の途中）', () => {
+  const app = loadApp({ today: TODAY });
+  assert.equal(app.$(`ITEMS.some(i => i.set === 'O2')`), true);
+  assert.equal(app.$(`drill().some(i => i.set === 'O2')`), false);
+  assert.notEqual(app.$(`nextItem('B').set`), 'O2');
+  assert.notEqual(app.$(`nextItem('C').set`), 'O2');
 });
 
 test('一覧・ホーム・記録の描画が未実施セットを含んでも落ちない', () => {
