@@ -54,6 +54,7 @@ nav button.on{color:var(--txt)}
 .bigbtn.b{background:var(--acc2)} .bigbtn.c{background:#0369a1}
 .bigbtn.ghost{background:var(--card2);color:var(--txt);border:1px solid var(--line)}
 .stats{display:flex;gap:10px}
+.quota{font-size:14px;text-align:center} .quota.done{background:#14532d;color:#fff;font-weight:700}
 .stat{flex:1;background:var(--card2);border-radius:10px;padding:10px;text-align:center}
 .stat b{display:block;font-size:20px}
 .stat span{font-size:11px;color:var(--dim)}
@@ -145,6 +146,7 @@ const NOT_YET = new Set(/*__NOT_YET__*/[]);
 const LOCK_KEY = 'oet-reading-commute-pass';
 const KEY = 'oet-reading-commute-v1';
 const INTERVALS = [1, 3, 7, 21];
+const QUOTA = {B: 2, C: 3};  // 1日のノルマ
 let S = load();
 function load(){
   let s = null;
@@ -283,6 +285,11 @@ function status(it){
   if (r.due && r.due <= today()) return 'due';
   return r.lastOk ? 'ok' : 'ng';
 }
+function doneToday(part){
+  const t = today();
+  return ITEMS.reduce((n, i) => { const r = i.part === part && rec(i.id); return n + (r ? (r.hist || []).filter(h => h[0] === t).length : 0); }, 0);
+}
+const quotaLeft = part => Math.max(0, QUOTA[part] - doneToday(part));
 function isWeak(it){ const r = rec(it.id); return (r && (!r.lastOk || r.wrong > 0)) || !!it.past; }
 
 /* queue: 復習期限切れ → 未回答（過去誤答を優先）→ 最も古く解いたもの */
@@ -339,6 +346,14 @@ function renderToday(){
   const dueB = drill().filter(i => i.part==='B' && status(i)==='due').length;
   const dueC = drill().filter(i => i.part==='C' && status(i)==='due').length;
   const nb = nextItem('B'), nc = nextItem('C');
+  const qd = {B: doneToday('B'), C: doneToday('C')};
+  const allDone = !quotaLeft('B') && !quotaLeft('C');
+  const prog = part => qd[part] >= QUOTA[part]
+    ? `<span class="pill okp">今日 ${qd[part]}/${QUOTA[part]} ✓</span>`
+    : `<span class="pill">今日 ${qd[part]}/${QUOTA[part]}</span>`;
+  const btn = (part, it) => quotaLeft(part)
+    ? `<button class="bigbtn ${part.toLowerCase()}" data-go="${it.id}">${part} を1問解く（あと${quotaLeft(part)}問）</button>`
+    : `<button class="bigbtn ghost" data-go="${it.id}">今日の${part}は完了 ✓ もう1問解く</button>`;
   const lbl = it => { const s = status(it); return s==='due' ? '<span class="pill due">復習</span>' : s==='new' ? '<span class="pill">未回答</span>' : '<span class="pill">再挑戦</span>'; };
   $('#main').innerHTML = `
     <div class="card"><div class="stats">
@@ -346,21 +361,24 @@ function renderToday(){
       <div class="stat"><b>${streak()}</b><span>連続日数</span></div>
       <div class="stat"><b>${dueB + dueC}</b><span>今日の復習</span></div>
     </div></div>
+    <div class="card quota ${allDone ? 'done' : ''}">${allDone
+      ? '🎉 今日のノルマ達成（B 2問・C 3問）'
+      : `今日のノルマ：<b>B ${QUOTA.B}問・C ${QUOTA.C}問</b>（残り B ${quotaLeft('B')}・C ${quotaLeft('C')}）`}</div>
     <div class="card today">
-      <div class="meta"><span class="pill b">Part B</span>${lbl(nb)}<span class="tiny">${setLabel(nb.set)} · 問${nb.n}</span></div>
+      <div class="meta"><span class="pill b">Part B</span>${prog('B')}${lbl(nb)}<span class="tiny">${setLabel(nb.set)} · 問${nb.n}</span></div>
       <h2>${esc(nb.title)}</h2>
       <div class="muted">短文1本＋3択 → 和訳・選択肢ごとの正誤・解説・ポイント</div>
-      <button class="bigbtn b" data-go="${nb.id}">B を1問解く</button>
+      ${btn('B', nb)}
     </div>
     <div class="card today">
-      <div class="meta"><span class="pill c">Part C</span>${lbl(nc)}<span class="tiny">${setLabel(nc.set)} · 問${nc.n}</span></div>
+      <div class="meta"><span class="pill c">Part C</span>${prog('C')}${lbl(nc)}<span class="tiny">${setLabel(nc.set)} · 問${nc.n}</span></div>
       <h2>${esc(nc.text.title)}</h2>
       <div class="muted">該当段落1つ＋4択 → 根拠文ハイライト</div>
-      <button class="bigbtn c" data-go="${nc.id}">C を1問解く</button>
+      ${btn('C', nc)}
     </div>
     ${lockNote()}${notYetNote()}
     ${SY.token ? `<p class="tiny" id="syncbadge">${esc(syncText())}</p>` : ''}
-    <p class="tiny">出題順：復習期限の来た問題 → 未回答（過去模試の誤答を優先）→ しばらく解いていない問題。間違えた問題は1→3→7→21日後に再出題。</p>`;
+    <p class="tiny">1日のノルマは B ${QUOTA.B}問・C ${QUOTA.C}問（他の端末で解いた分も同期で入ります）。出題順：復習期限の来た問題 → 未回答（過去模試の誤答を優先）→ しばらく解いていない問題。間違えた問題は1→3→7→21日後に再出題。</p>`;
   $('#main').querySelectorAll('[data-go]').forEach(b => b.onclick = () => openItem(b.dataset.go, 'today'));
 }
 function openItem(id, from){ VIEW = {id, from}; render(); window.scrollTo(0,0); }
@@ -461,13 +479,20 @@ function reveal(it, choice){
        <div class="sec"><h4>ポイント</h4><div class="point">${esc(it.pt)}</div></div>${doubt}${voc}
        <details><summary>本文の和訳</summary><div class="body">${esc(it.ja)}</div></details>`
     : `<div class="sec"><h4>根拠（黄色マーカー）</h4><div class="point">${esc(it.note)}</div></div>${doubt}${voc}`;
-  const nextLbl = VIEW.from === 'today' ? `次の${it.part}へ` : '次の問題';
+  // ホームから来たときは、このパートのノルマが済んだら残りのパートへ、両方済んだらホームへ
+  const other = isB ? 'C' : 'B';
+  const nextPart = VIEW.from !== 'today' || quotaLeft(it.part) || !quotaLeft(other) ? it.part : other;
+  const allDone = VIEW.from === 'today' && !quotaLeft('B') && !quotaLeft('C');
+  const nextLbl = VIEW.from !== 'today' ? '次の問題'
+    : allDone ? '今日のノルマ達成 🎉'
+    : nextPart === it.part ? `次の${it.part}へ（あと${quotaLeft(it.part)}問）` : `${it.part}は完了 → ${nextPart}へ（${quotaLeft(nextPart)}問）`;
   $('#after').innerHTML = `${res}${body}
-    <div class="navrow"><button class="bigbtn ghost" id="back">戻る</button><button class="bigbtn ${isB?'b':'c'}" id="next">${nextLbl} →</button></div>`;
+    <div class="navrow"><button class="bigbtn ghost" id="back">戻る</button><button class="bigbtn ${allDone ? 'ghost' : nextPart.toLowerCase()}" id="next">${nextLbl}${allDone ? '' : ' →'}</button></div>`;
   $('#back').onclick = () => { VIEW = null; render(); window.scrollTo(0,0); };
   $('#next').onclick = () => {
     let n;
-    if (VIEW.from === 'today') n = nextItem(it.part, it.id);
+    if (allDone) { VIEW = null; render(); window.scrollTo(0,0); return; }
+    if (VIEW.from === 'today') n = nextItem(nextPart, it.id);
     else { const list = drill().filter(i => i.part === it.part); n = list[(list.indexOf(it) + 1) % list.length]; }
     openItem(n.id, VIEW.from);
   };
