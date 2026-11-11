@@ -492,7 +492,8 @@ function reveal(it, choice){
     ? `${it.ev && it.ev.length ? '<p class="tiny">本文の黄色マーカー＝正解の根拠</p>' : ''}<div class="sec"><h4>解説</h4><div class="body">${esc(it.exp)}</div></div>
        <div class="sec"><h4>ポイント</h4><div class="point">${esc(it.pt)}</div></div>${doubt}${voc}
        <details><summary>本文の和訳</summary><div class="body">${esc(it.ja)}</div></details>`
-    : `<div class="sec"><h4>根拠（黄色マーカー）</h4>${it.evja ? `<div class="evja">${esc(it.evja)}</div>` : ''}<div class="point">${esc(it.note)}</div></div>${doubt}${voc}`;
+    : `<div class="sec"><h4>根拠（黄色マーカー）</h4>${it.evja ? `<div class="evja">${esc(it.evja)}</div>` : ''}<div class="point">${esc(it.note)}</div></div>${doubt}${voc}
+       ${it.text.ja ? `<details><summary>この段落の和訳</summary><div class="body">${esc(it.text.ja[it.p])}</div></details>` : ''}`;
   // ホームから来たときは、このパートのノルマが済んだら残りのパートへ、両方済んだらホームへ
   const other = isB ? 'C' : 'B';
   const nextPart = VIEW.from !== 'today' || quotaLeft(it.part) || !quotaLeft(other) ? it.part : other;

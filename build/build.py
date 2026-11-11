@@ -39,6 +39,9 @@ def build_sets(root):
         # Part C の設問と根拠文の和訳（2026-11-11〜。無いセットは和訳なしで出す）
         cja_path = f'{root}/ann/cja/{sid}.json'
         cja = json.load(open(cja_path))['C'] if os.path.exists(cja_path) else None
+        # Part C の段落ごとの和訳（2026-11-12〜。解答後に「この段落の和訳」で出す。無いセットは和訳なし）
+        pja_path = f'{root}/ann/pja/{sid}.json'
+        pja = json.load(open(pja_path))['texts'] if os.path.exists(pja_path) else None
         # Part B の根拠（本文中でハイライトする箇所。1問に複数可）
         bev_path = f'{root}/ann/bev/{sid}.json'
         bev = json.load(open(bev_path))['B'] if os.path.exists(bev_path) else None
@@ -58,6 +61,12 @@ def build_sets(root):
                 need(evs, f"B{b['n']} の根拠が空です")
                 for e in evs:
                     need(any(norm(e) in p for p in paras), f"B{b['n']} の根拠が本文に見つかりません: {e[:60]}")
+        need(pja is None or (len(pja) == len(texts) and all(len(j) == len(t['paras']) for j, t in zip(pja, texts))),
+             'pja の段落数が本文と一致しません')
+        need(pja is None or all(x.strip() for j in pja for x in j), 'pja に空の和訳があります')
+        if pja:
+            for t, j in zip(texts, pja):
+                t['ja'] = j
         need(cja is None or all(x.get('q', '').strip() and x.get('ev', '').strip() for x in cja), 'cja に空の和訳があります')
         B = []
         for i,b in enumerate(s['B']):
