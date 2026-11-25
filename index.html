@@ -294,18 +294,36 @@ const quotaLeft = part => Math.max(0, QUOTA[part] - doneToday(part));
 function isWeak(it){ const r = rec(it.id); return (r && (!r.lastOk || r.wrong > 0)) || !!it.past; }
 
 /* queue: 復習期限切れ → 未回答（過去誤答を優先）→ 最も古く解いたもの */
-function nextItem(part, excludeId){
-  const pool = drill().filter(i => i.part === part && i.id !== excludeId);
+function queueOf(pool){
   const t = today();
   const due = pool.filter(i => { const r = rec(i.id); return r && r.due && r.due <= t; })
                   .sort((a,b) => rec(a.id).due.localeCompare(rec(b.id).due));
-  if (due.length) return due[0];
   const fresh = pool.filter(i => !rec(i.id));
-  const freshPast = fresh.filter(i => i.past);
-  if (freshPast.length) return freshPast[0];
-  if (fresh.length) return fresh[0];
-  return pool.slice().sort((a,b) => (rec(a.id).last || '').localeCompare(rec(b.id).last || ''))[0];
+  const rest = pool.filter(i => rec(i.id) && !due.includes(i))
+                   .sort((a,b) => (rec(a.id).last || '').localeCompare(rec(b.id).last || ''));
+  return [...due, ...fresh.filter(i => i.past), ...fresh.filter(i => !i.past), ...rest];
 }
+const textKey = it => `${it.set}|${it.t}`;
+const answeredToday = it => { const r = rec(it.id); return !!r && (r.hist || []).some(h => h[0] === today()); };
+function nextItem(part, excludeId){
+  const pool = drill().filter(i => i.part === part && i.id !== excludeId);
+  const q = queueOf(pool);
+  if (part !== 'C') return q[0];
+  // Part C：その日の C は同じ大問（本文）からノルマ分（3問）を出す
+  const left = key => pool.filter(i => textKey(i) === key && !answeredToday(i));
+  const doneC = drill().filter(i => i.part === 'C' && answeredToday(i));
+  if (doneC.length) {
+    const cnt = {};
+    doneC.forEach(i => { cnt[textKey(i)] = (cnt[textKey(i)] || 0) + 1; });
+    const key = Object.keys(cnt).sort((a,b) => cnt[b] - cnt[a])[0];
+    const same = left(key).sort((a,b) => queueRank(a) - queueRank(b) || a.n - b.n);
+    if (same.length) return same[0];
+  }
+  // その日最初の C：残りがノルマ分ある大問のうち、いちばん優先度の高い問題から
+  return q.find(i => left(textKey(i)).length >= QUOTA.C) || q[0];
+}
+// 復習期限切れ → 未回答 → それ以外 の段階で比べる（同じ段階なら問題番号順）
+function queueRank(it){ const r = rec(it.id); return r && r.due && r.due <= today() ? 0 : !r ? 1 : 2; }
 
 function answer(it, choice){
   const ok = choice === it.key || (it.alt || []).includes(choice);
@@ -379,7 +397,7 @@ function renderToday(){
     </div>
     ${lockNote()}${notYetNote()}
     ${SY.token ? `<p class="tiny" id="syncbadge">${esc(syncText())}</p>` : ''}
-    <p class="tiny">1日のノルマは B ${QUOTA.B}問・C ${QUOTA.C}問（他の端末で解いた分も同期で入ります）。出題順：復習期限の来た問題 → 未回答（過去模試の誤答を優先）→ しばらく解いていない問題。間違えた問題は1→3→7→21日後に再出題。</p>`;
+    <p class="tiny">1日のノルマは B ${QUOTA.B}問・C ${QUOTA.C}問（他の端末で解いた分も同期で入ります）。C の3問は同じ大問（本文）から出します。出題順：復習期限の来た問題 → 未回答（過去模試の誤答を優先）→ しばらく解いていない問題。間違えた問題は1→3→7→21日後に再出題。</p>`;
   $('#main').querySelectorAll('[data-go]').forEach(b => b.onclick = () => openItem(b.dataset.go, 'today'));
 }
 function openItem(id, from){ VIEW = {id, from}; render(); window.scrollTo(0,0); }
